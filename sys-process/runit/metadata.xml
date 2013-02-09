@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer>
+ <email>joe9mail@gmail.com</email>
+</maintainer>
+<longdescription>
+Runit - A replacement for sysvinit, and other init schemes, with service supervision
+</longdescription>
+<use>
+ <flag name='dietlibc'>Use dietlibc to build the package.</flag>
+ <flag name='static'>Static build.</flag>
+</use>
+</pkgmetadata>

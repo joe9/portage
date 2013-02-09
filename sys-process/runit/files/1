@@ -1,0 +1,11 @@
+#!/bin/sh -xv
+# system one time tasks
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+# from the crux handbook
+#  /etc/rc  System boot script
+/etc/rc
+
+touch /run/runit/{stopit,reboot}
+chmod 0 /run/runit/{stopit,reboot}
