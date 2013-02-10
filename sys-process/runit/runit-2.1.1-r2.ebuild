@@ -124,8 +124,6 @@ src_install() {
 	doexe   ${FILESDIR}/[123]
 	doexe   "${S}/../etc/debian/ctrlaltdel"
 
-	dosbin $(<${S}/../package/commands)
-
 	# add gettys for 1-6 terminals
 	for i in {1..5}
 	do
@@ -150,4 +148,8 @@ src_install() {
 	install_service multi atd     run.atd
 	install_service multi crond   run.crond
 	install_service multi acpid   run.acpid
+
+	into /
+	dosbin $(<${S}/../package/commands)
+	into /usr/
 }

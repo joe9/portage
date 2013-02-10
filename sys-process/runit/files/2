@@ -3,6 +3,23 @@
 # changed the above from /bin/sh to /bin/bash as per /etc/rc.multi
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
+# create run directory for runsvdir
+mkdir -p /run/runit/runsvdir
+for d in /etc/runit/runsvdir/*
+do
+   ln -sf $d /run/runit/runsvdir/$(basename $d)
+done
+
+# create run directory for runit services
+find /etc/sv -iname "supervise" | \
+   sed -e 's,^/etc/,/run/,g' | \
+   xargs mkdir -p
+
+# create symlink to /run/service
+ln -sf multi  /run/runit/runsvdir/current
+ln -sf single /run/runit/runsvdir/previous
+ln -sf /run/runit/runsvdir/current /run/service
+
 # Do not start services besides tty's if we're running single-user.
 if [ -n "$(grep ttys cmdline)" ]
 then
@@ -14,9 +31,11 @@ then
    runsvchdir single
 else
    # taken the below from /etc/rc.multi
+   /sbin/rc default
    runsvchdir multi
-   /etc/rc.multi
 fi
 
 exec env - PATH=$PATH \
-runsvdir -P /var/run/runit/runsvdir/current 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
+runsvdir -P /run/runit/runsvdir/current 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
+
+# vim:filetype=sh tabstop=3 shiftwidth=3 expandtab

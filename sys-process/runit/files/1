@@ -3,9 +3,10 @@
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 
-# from the crux handbook
-#  /etc/rc  System boot script
-/etc/rc
+RUNLEVEL=S /sbin/rc sysinit
+RUNLEVEL=S /sbin/rc boot
 
 touch /run/runit/{stopit,reboot}
 chmod 0 /run/runit/{stopit,reboot}
+
+# vim:filetype=sh tabstop=3 shiftwidth=3 expandtab
