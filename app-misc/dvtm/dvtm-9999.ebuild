@@ -4,7 +4,7 @@
 
 EAPI="5"
 
-inherit savedconfig toolchain-funcs git-2
+inherit savedconfig toolchain-funcs git-2 eutils
 
 DESCRIPTION="Dynamic virtual terminal manager"
 HOMEPAGE="http://www.brain-dump.org/projects/dvtm/"
@@ -32,7 +32,10 @@ src_prepare() {
 	}
 	sed -i \
 		-e '/strip/d' \
+		-e 's:@tic :@tic -o ${ED}/usr/share/terminfo :g' \
 		Makefile || die "sed Makefile failed"
+	#epatch "${FILESDIR}/sitm.patch"
+	cp ${FILESDIR}/dvtm.info ./
 
 	restore_config config.h
 }
@@ -44,12 +47,12 @@ src_compile() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" PREFIX="/usr" install || die "emake install failed"
+	emake DESTDIR="${D}" PREFIX="/usr" install
 
 	insinto /usr/share/${PN}
-	newins config.h ${PF}.config.h || die "newins failed"
+	newins config.h ${PF}.config.h
 
-	dodoc README || die "dodoc failed"
+	dodoc README
 
 	save_config config.h
 }

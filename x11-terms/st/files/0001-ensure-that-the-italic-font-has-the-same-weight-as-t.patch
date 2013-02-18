@@ -1,0 +1,47 @@
+From 09c709ebd2ca6ce0aa8cdde3b4ea9ac9f91ac3f4 Mon Sep 17 00:00:00 2001
+From: joe9 <joe9mail@gmail.com>
+Date: Mon, 18 Feb 2013 12:31:29 -0500
+Subject: [PATCH] ensure that the italic font has the same weight as the
+ normal font
+
+The specified font[] pattern need not have a medium weight. It could be
+specified as a number too or have a different weight other than medium.
+---
+ st.c | 16 +++++++---------
+ 1 file changed, 7 insertions(+), 9 deletions(-)
+
+diff --git a/st.c b/st.c
+index 64366af..8a48571 100644
+--- a/st.c
++++ b/st.c
+@@ -2444,20 +2444,18 @@ xloadfonts(char *fontstr, int fontsize) {
+ 	xw.ch = dc.font.height;
+ 
+ 	FcPatternDel(pattern, FC_SLANT);
+-	FcPatternDel(pattern, FC_WEIGHT);
+-	FcPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ROMAN);
+-	FcPatternAddInteger(pattern, FC_WEIGHT, FC_WEIGHT_BOLD);
+-	if(xloadfont(&dc.bfont, pattern))
++	FcPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ITALIC);
++	if(xloadfont(&dc.ifont, pattern))
+ 		die("st: can't open font %s\n", fontstr);
+ 
+-	FcPatternDel(pattern, FC_SLANT);
+-	FcPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ITALIC);
++	FcPatternDel(pattern, FC_WEIGHT);
++	FcPatternAddInteger(pattern, FC_WEIGHT, FC_WEIGHT_BOLD);
+ 	if(xloadfont(&dc.ibfont, pattern))
+ 		die("st: can't open font %s\n", fontstr);
+ 
+-	FcPatternDel(pattern, FC_WEIGHT);
+-	FcPatternAddInteger(pattern, FC_WEIGHT, FC_WEIGHT_MEDIUM);
+-	if(xloadfont(&dc.ifont, pattern))
++	FcPatternDel(pattern, FC_SLANT);
++	FcPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ROMAN);
++	if(xloadfont(&dc.bfont, pattern))
+ 		die("st: can't open font %s\n", fontstr);
+ 
+ 	FcPatternDestroy(pattern);
+-- 
+1.7.12.4
+
