@@ -22,10 +22,12 @@ S="${WORKDIR}"
 src_install() {
 	# add gettys for 1-6 terminals
 	i=6
+
 	dodir /etc/sv/tty$i
 	exeinto "/etc/sv/tty$i/"
 	newexe "${FILESDIR}/run"    run
 	newexe "${FILESDIR}/finish" finish
+	dosym /run/sv/tty$i/supervise /etc/sv/tty$i/supervise
 
 	dodir /etc/runit/runsvdir/multi
 	dosym /etc/sv/tty$i /etc/runit/runsvdir/multi/tty$i
