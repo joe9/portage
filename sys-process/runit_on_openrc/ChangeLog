@@ -2,6 +2,6 @@
 # Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
-  06 Feb 2013; XXXXXX xxxxxx <xxxx@gentoo.org> nano-2.3.1-r2.ebuild:
-  Initial runit build
+  06 Feb 2013; XXXXXX xxxxxx <xxxx@gentoo.org> runit_on_openrc-2.1.1.ebuild:
+  Initial runit on openrc build
   submitted by Joe M <joe9mail@gmail.com>

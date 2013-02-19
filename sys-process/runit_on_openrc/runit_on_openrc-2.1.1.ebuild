@@ -6,9 +6,11 @@ EAPI="5"
 
 inherit toolchain-funcs flag-o-matic
 
-DESCRIPTION="A UNIX init scheme with service supervision"
+DESCRIPTION="A UNIX init scheme with service supervision leveraging openrc services"
 HOMEPAGE="http://smarden.org/runit/"
-SRC_URI="http://smarden.org/${PN}/${P}.tar.gz"
+MY_PN="runit"
+MY_P=${MY_PN}-${PV}
+SRC_URI="http://smarden.org/${MY_PN}/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -18,10 +20,11 @@ IUSE="dietlibc static"
 RDEPEND="
 	dietlibc? ( dev-libs/dietlibc )
 	app-shells/dash
+	sys-apps/openrc
 "
 DEPEND="${RDEPEND}"
 
-S="${WORKDIR}/admin/${P}/src"
+S="${WORKDIR}/admin/${MY_P}/src"
 
 src_prepare() {
 	# we either build everything or nothing static

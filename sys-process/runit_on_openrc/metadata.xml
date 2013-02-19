@@ -5,7 +5,7 @@
  <email>joe9mail@gmail.com</email>
 </maintainer>
 <longdescription>
-Runit - A replacement for sysvinit, and other init schemes, with service supervision
+Runit - A replacement for sysvinit, and other init schemes, with service supervision and leveraging openrc services
 </longdescription>
 <use>
  <flag name='dietlibc'>Use dietlibc to build the package.</flag>
