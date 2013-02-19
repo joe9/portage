@@ -40,7 +40,7 @@ mdadm_emake() {
 
 src_compile() {
 	use static && append-ldflags -static
-	mdadm_emake all mdassemble
+	mdadm_emake all mdassemble mdadm.static
 }
 
 src_test() {
@@ -53,6 +53,7 @@ src_install() {
 	emake DESTDIR="${D}" install
 	into /
 	dosbin mdassemble
+	dosbin mdadm.static
 	dodoc ChangeLog INSTALL TODO README* ANNOUNCE-${PV}
 
 	insinto /etc
