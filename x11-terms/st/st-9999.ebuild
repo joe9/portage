@@ -36,11 +36,11 @@ src_prepare() {
 	tc-export CC
 
 	restore_config config.h
-	epatch \
-	 "$FILESDIR/0001-ensure-that-the-italic-font-has-the-same-weight-as-t.patch"
+	#epatch \
+	# "$FILESDIR/0001-ensure-that-the-italic-font-has-the-same-weight-as-t.patch"
 	# "$FILESDIR/0001-added-slant-and-weight-to-dc.ifont-dc.ibfont-and-dc..patch"
-	epatch \
-	 "$FILESDIR/0002-checkout-unknown-private-set-reset-mode-1005.patch"
+	#epatch \
+	# "$FILESDIR/0002-checkout-unknown-private-set-reset-mode-1005.patch"
 }
 
 src_install() {
