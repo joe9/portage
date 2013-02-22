@@ -27,6 +27,8 @@ src_prepare() {
 	sed -e '/^CFLAGS/s:[[:space:]]-Wall[[:space:]]: :' \
 		-e '/^CFLAGS/s:[[:space:]]-O[^[:space:]]*[[:space:]]: :' \
 		-e '/^LDFLAGS/{s:[[:space:]]-s[[:space:]]: :}' \
+		-e '/^X11INC/{s:/usr/X11R6/lib:/usr/include/X11:}' \
+		-e '/^X11LIB/{s:/usr/X11R6/lib:/usr/lib/X11:}' \
 		-i config.mk || die
 	tc-export CC
 
@@ -34,7 +36,7 @@ src_prepare() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" PREFIX="${EPREFIX}"/usr install || die
+	emake DESTDIR="${D}" X11INC="/usr/include/X11" X11LIB="/usr/lib/X11" PREFIX="${EPREFIX}"/usr install
 	tic -s -o "${ED}"/usr/share/terminfo st.info || die
 	dodoc TODO
 
