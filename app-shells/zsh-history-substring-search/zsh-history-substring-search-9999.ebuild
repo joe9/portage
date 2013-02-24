@@ -10,7 +10,6 @@ EGIT_REPO_URI="git://github.com/zsh-users/${PN}.git"
 [ -n "${EVCS_OFFLINE}" ] || EGIT_REPACK=true
 inherit git-2
 PROPERTIES="live"
-SRC_URI=""
 KEYWORDS=""
 
 DESCRIPTION="Fish shell like history substring search for zsh"
