@@ -26,10 +26,24 @@ src_prepare() {
 
 src_compile() {
 	cd ${S}/src
+	# adding this flag below as recommended by
+	#  http://www.gentoo.org/proj/en/hardened/gnu-stack.xml
+	#  is not helping.
+	#  As per http://www.gentoo.org/proj/en/hardened/gnu-stack.xml?style=printable
+	#  it is related to nested functions, emailed upstream
+	#  about it
+	#append-flags -Wa,--noexecstack
 	emake
 }
 
 src_install() {
 	cd ${S}/src
+	# adding this flag below as recommended by
+	#  http://www.gentoo.org/proj/en/hardened/gnu-stack.xml
+	#  is not helping.
+	#  As per http://www.gentoo.org/proj/en/hardened/gnu-stack.xml?style=printable
+	#  it is related to nested functions, emailed upstream
+	#  about it
+	#append-flags -Wa,--noexecstack
 	emake install_root="${D}" install
 }
