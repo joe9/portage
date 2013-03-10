@@ -4,5 +4,85 @@
 	<herd>frtplot</herd>
 	<longdescription>
 		Free Real-time Data Plotter
+
+ * QA Notice: The following files contain writable and executable sections
+ *  Files with such sections will not work properly (or at all!) on some
+ *  architectures/operating systems.  A bug should be filed at
+ *  http://bugs.gentoo.org/ to make sure the issue is fixed.
+ *  For more information, see http://hardened.gentoo.org/gnu-stack.xml
+ *  Please include the following list of files in your report:
+ *  Note: Bugs should be filed for the respective maintainers
+ *  of the package in question and not hardened@g.o.
+ * RWX --- --- usr/lib/frtplot-uikit.so.1.0.0
+ * RWX --- --- usr/lib/frtplot-uikit.so
+ * RWX --- --- usr/bin/frtplot
+
+		Below is the email from the author about the above issue.
+
+Delivered-To: joe9mail@gmail.com
+Subject: Re: frtplot Makefile
+From: Mate Nagy <mnagy@port70.net>
+To: joe M <joe9mail@gmail.com>
+
+Hiyo,
+I fixed the frtplot-uikit Makefile too.
+
+Wrt. the executable stack, in my opinion marking the stack not =
+executable is a nasty workaround at best for some specific security =
+issues.
+We should strive to use more "modern" programming languages with better =
+inherent security instead of trying to adapt to the crippled legacy of =
+C/C++.
+Using the nested function GCC extensions are a very nice language perk =
+(a very small thing that all C compilers should support IMHO), I think =
+the benefits outweigh the drawbacks (although restricting the set of =
+usable compilers to only GCC is a strong drawback these days).
+
+Regardless of programming language/religious arguments, on the long =
+term, I'd be more interested in rewriting frtplot from the scratch =
+(again - the current one is the second iteration).
+I think the current frtplot is vastly too complicated, making easy =
+things difficult (especially with the config language)...
+In a typical usage scenario where your output is a bunch of numbers in =
+records separated by EOL, frtplot should magically work like this:
+./output | frtplot
+Records should be detected, and functions should be drawn separately =
+with a good automatic color scheme, etc etc.
+I guess input on this is welcome (what are your typical usage scenarios =
+/ problems)?...
+
+I'm also not terribly satisfied with SDL in general and the current =
+drawing methods in particular (plots should be nicely AA'd and pretty =
+-_-). I could imagine the new one using something like QT instead (even =
+though I think C++ is a coding horror, implementing my own widget set =
+and drawing code is an even worse coding horror).
+
+Well anyway, thanks for reading all this and still using/packaging the =
+tool :)
+Cheers,
+Mate
+
+
+On Mar 9, 2013, at 11:30 PM, joe M <joe9mail@gmail.com> wrote:
+
+> Hello Mate,
+>=20
+> On a different note, using the trampoline for nested functions is
+> causing an issue regarding the executable stack.
+>=20
+> "GCC generates code to be executed on the stack when it implements a
+> trampoline for nested functions. To remove the need for an executable
+> stack in this case, it is necessary to rewrite the code another way.
+> Sometimes this is relatively easy, other times not." from
+> http://www.gentoo.org/proj/en/hardened/gnu-stack.xml?style=3Dprintable
+>=20
+> Not sure how interested you would be to rewrite the code without
+> nested functions.
+>=20
+> Any thoughts, please?
+>=20
+> Thanks
+> Joe
+>=20
 	</longdescription>
 </pkgmetadata>
