@@ -20,9 +20,9 @@ S="${WORKDIR}/${MY_P}/src"
 RDEPEND="media-libs/libsdl"
 DEPEND="${RDEPEND}"
 
-src_prepare() {
-	find . -name Makefile -exec sed -i -e 's/-fnested-functions//g' \{\} \;
-}
+#src_prepare() {
+#	find . -name Makefile -exec sed -i -e 's/-fnested-functions//g' \{\} \;
+#}
 
 src_compile() {
 	cd ${S}/src
