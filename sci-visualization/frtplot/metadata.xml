@@ -19,10 +19,10 @@
 
 		Below is the email from the author about the above issue.
 
-Delivered-To: joe9mail@gmail.com
+Delivered-To: joe M
 Subject: Re: frtplot Makefile
-From: Mate Nagy <mnagy@port70.net>
-To: joe M <joe9mail@gmail.com>
+From: Mate Nagy
+To: joe M
 
 Hiyo,
 I fixed the frtplot-uikit Makefile too.
@@ -63,7 +63,7 @@ Cheers,
 Mate
 
 
-On Mar 9, 2013, at 11:30 PM, joe M <joe9mail@gmail.com> wrote:
+On Mar 9, 2013, at 11:30 PM, joe M wrote:
 
 > Hello Mate,
 >=20
