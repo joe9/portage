@@ -20,4 +20,5 @@ S="${WORKDIR}"
 
 src_install() {
    dobin bootinfoscript
+   dodoc README CHANGELOG
 }
