@@ -12,8 +12,7 @@ HOMEPAGE="http://frtplot.port70.net/"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 x86"
-IUSE=""
+KEYWORDS="~amd64 ~x86"
 S="${WORKDIR}/${MY_P}/src"
 
 
