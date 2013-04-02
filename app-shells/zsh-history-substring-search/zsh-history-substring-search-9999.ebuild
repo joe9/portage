@@ -4,11 +4,10 @@
 
 EAPI=5
 
-inherit eutils
+inherit eutils git-2
 
 EGIT_REPO_URI="git://github.com/zsh-users/${PN}.git"
-[ -n "${EVCS_OFFLINE}" ] || EGIT_REPACK=true
-inherit git-2
+[[ -n "${EVCS_OFFLINE}" ]] || EGIT_REPACK=true
 PROPERTIES="live"
 KEYWORDS=""
 
