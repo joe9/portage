@@ -26,7 +26,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	[ -n "${REPLACING_VERSIONS}" ] && return
+	[[ -n "${REPLACING_VERSIONS}" ]] && return
 	elog "In order to use ${CATEGORY}/${PN} add"
 	elog ". /usr/share/zsh/site-contrib/${PN}/zsh-history-substring-search.zsh"
 	elog "at the end of your ~/.zshrc"
