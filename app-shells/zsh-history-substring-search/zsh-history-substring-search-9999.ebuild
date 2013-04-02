@@ -2,24 +2,20 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI="5"
 
 inherit eutils git-2
 
 EGIT_REPO_URI="git://github.com/zsh-users/${PN}.git"
 [[ -n "${EVCS_OFFLINE}" ]] || EGIT_REPACK=true
-PROPERTIES="live"
-KEYWORDS=""
 
 DESCRIPTION="Fish shell like history substring search for zsh"
 HOMEPAGE="https://github.com/zsh-users/zsh-history-substring-search"
 
 LICENSE="HPND"
 SLOT="0"
-IUSE=""
 
 RDEPEND="app-shells/zsh"
-DEPEND=""
 
 src_prepare() {
 	epatch_user
