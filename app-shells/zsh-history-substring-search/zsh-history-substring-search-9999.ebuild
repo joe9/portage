@@ -6,7 +6,7 @@ EAPI="5"
 
 inherit eutils git-2
 
-EGIT_REPO_URI="git://github.com/zsh-users/${PN}.git"
+EGIT_REPO_URI="git://github.com/zsh-users/zsh-history-substring-search.git"
 DESCRIPTION="Fish shell like history substring search for zsh"
 HOMEPAGE="https://github.com/zsh-users/zsh-history-substring-search"
 
