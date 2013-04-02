@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://github.com/zsh-users/${PN}.git"
 DESCRIPTION="Fish shell like history substring search for zsh"
 HOMEPAGE="https://github.com/zsh-users/zsh-history-substring-search"
 
-LICENSE="HPND"
+LICENSE="BSD"
 SLOT="0"
 
 RDEPEND="app-shells/zsh"
