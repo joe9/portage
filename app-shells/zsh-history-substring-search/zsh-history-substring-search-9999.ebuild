@@ -7,8 +7,6 @@ EAPI="5"
 inherit eutils git-2
 
 EGIT_REPO_URI="git://github.com/zsh-users/${PN}.git"
-[[ -n "${EVCS_OFFLINE}" ]] || EGIT_REPACK=true
-
 DESCRIPTION="Fish shell like history substring search for zsh"
 HOMEPAGE="https://github.com/zsh-users/zsh-history-substring-search"
 
