@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-embedded/pk2cmd/pk2cmd-1.20.ebuild,v 1.4 2012/05/25 08:01:20 ssuominen Exp $
 
@@ -14,20 +14,17 @@ SRC_URI="http://ww1.microchip.com/downloads/en/DeviceDoc/PICkit2_PK2CMD_WIN32_So
 
 LICENSE="MicroChip-PK2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~ppc ~ppc64 ~amd64 ~x86"
 
 DEPEND="virtual/libusb:0
-         dev-embedded/pk2df"
+		dev-embedded/pk2df"
 RDEPEND="${DEPEND}"
 
 # S="${WORKDIR}/${PN}/${PN}"
 S="${WORKDIR}/${PN}"
 
-src_unpack() {
-	unpack ${A}
-	cd "${S}"
-
-        # find . -type f -exec dos2unix {} \;
+src_prepare() {
+	# find . -type f -exec dos2unix {} \;
 
 	cp "${FILESDIR}/60-pickit2.rules" "$S/release/"
 	# Patch adds /usr/share/pk2 to the default search for the device file
@@ -37,8 +34,8 @@ src_unpack() {
 	# cd "${PN}"
 	# epatch "${FILESDIR}/pk2_devicefile_osfile_paths.patch"
 	# cd "${S}"
-        # patch --merge -p0 -i $SRC/verbose.patch
-        # patch --merge -p0 -i $SRC/usb_debug.patch
+	# patch --merge -p0 -i $SRC/verbose.patch
+	# patch --merge -p0 -i $SRC/usb_debug.patch
 
 	# Fix up the Makefile
 	sed -i 's:#TARGET=linux:TARGET=linux:' Makefile
@@ -60,9 +57,9 @@ src_install() {
 	insinto "/usr/share/pk2"
 	# doins PK2DeviceFile.dat
 	doins PK2V023200.hex
-        # Install the udev rules
+	# Install the udev rules
 	insinto "/lib/udev/rules.d"
-        doins 60-pickit2.rules
+	doins 60-pickit2.rules
 	# Install the program
 	exeinto /usr/bin
 	cd "${S}/${PN}"
