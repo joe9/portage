@@ -1,0 +1,31 @@
+# ChangeLog for dev-embedded/mplabc30
+# Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*mplabc30-3.31 (06 Apr 2013)
+*mplabalc30-3.31 (06 Apr 2013)
+
+  06 Apr 2013; Joe M <joe9mail@gmail.com> +Pkgfile, +README,
+  +files/bugfix.patch, +files/c30_flag_definitions.h.patch,
+  +files/configure.patch, +files/default-include-path.patch,
+  +files/delete_location_of_c30_device_info.resource-path.diff,
+  +files/disable-fixinc.patch, +files/docs.patch, +files/gcc.c.patch,
+  +files/libiberty-testsuite.diff, +files/make-relative-prefix.diff,
+  +files/notestsuite.patch, +files/pic30-protos.h.patch,
+  +files/pic30-standard-prefix.diff, +files/pic30.c.host_int.patch,
+  +files/pic30.c.patch, +files/pic30.c.remove_warnings.patch,
+  +files/program-prefix-fix.diff, +files/remove-omf.diff,
+  +files/resource.c.patch, +files/resource.patch, +files/search-path-fix.diff,
+  +files/t-pic30.diff, +files/version.patch, +metadata.xml,
+  +mplabalc30/ChangeLog, +mplabalc30/Manifest,
+  +mplabalc30/files/allow-empty-device-info-file.diff,
+  +mplabalc30/files/binutils-makefile_in.diff,
+  +mplabalc30/files/c30_resource-paths.patch,
+  +mplabalc30/files/cpu-pic30.c.patch, +mplabalc30/files/default-path.patch,
+  +mplabalc30/files/morediffs.patch, +mplabalc30/files/relocation-fix.patch,
+  +mplabalc30/files/resource.patch, +mplabalc30/files/sbrk.patch,
+  +mplabalc30/files/search-path-fix.diff, +mplabalc30/metadata.xml,
+  +mplabalc30/mplabalc30.PKGBUILD, +mplabc30.PKGBUILD, mplabalc30-3.31.ebuild,
+  +mplabc30-3.31.ebuild:
+  Initial Import
+
