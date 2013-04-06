@@ -15,7 +15,7 @@ inherit autotools-utils eutils multibuild toolchain-funcs
 DESCRIPTION="MPLAB ASM30 Assembler"
 HOMEPAGE="http://www.microchip.com"
 MY_PV=${PV//./_}
-S_URI="http://ww1.microchip.com/downloads/en/DeviceDoc/${PN}v${MY_PV}.tar.gz"
+SRC_URI="http://ww1.microchip.com/downloads/en/DeviceDoc/${PN}v${MY_PV}.tar.gz"
 
 LICENSE="MicroChip-PK2"
 SLOT="0"
@@ -24,10 +24,11 @@ KEYWORDS="~amd64 ~x86"
 PDEPEND="dev-embedded/xc16_data"
 DEPEND="app-text/dos2unix"
 
-MULTIBUILD_VARIANTS=( coff elf )
+# MULTIBUILD_VARIANTS=( coff elf )
+MULTIBUILD_VARIANTS=( coff )
 
 # S="${WORKDIR}/${PN}/${PN}"
-S="${WORKDIR}/${PN}"
+S="${WORKDIR}"
 
 src_prepare() {
 	# There is a problem with finding the resource file
@@ -45,7 +46,7 @@ src_prepare() {
 			"/usr/share/pic30/c30_device.info",
 			"/usr/share/pic30/bin/c30_device.info",
 			0
-		}
+		};
 	_EOF_
 
 	echo "#define MCHP_VERSION v${PV} for Gentoo Linux" \
@@ -64,6 +65,8 @@ src_prepare() {
 	epatch "${FILESDIR}/c30_resource-paths.patch"
 	epatch "${FILESDIR}/resource.patch"
 	epatch "${FILESDIR}/cpu-pic30.c.patch"
+	# delete the below patch file, wrong.
+	# epatch "${FILESDIR}/cpu-pic30.c.correct_prototype_error.patch"
 	# unused patch file from the arch build
 	#  default-path.patch
 
@@ -92,6 +95,12 @@ src_prepare() {
 #	<mgorny> and {} + passes all files to one command
 #	<mgorny> like touch a b c
 	find -name '*.[ly]' -type f -exec touch '{}' +
+
+	mkdir -p	 "${S}/build-coff"	 "${S}/build-elf"
+	cp --archive "${S}/acme"		 "${S}/build-coff/"
+	cp --archive "${S}/c30_resource" "${S}/build-coff/"
+	cp --archive "${S}/acme" 		 "${S}/build-elf/"
+	cp --archive "${S}/c30_resource" "${S}/build-elf/"
 }
 
 src_configure() {
@@ -104,31 +113,57 @@ src_configure() {
 
 		# -x   Mark each name for export to subsequent commands
 		#	via the environment.
-		local -x CFLAGS="${CFLAGS}
-						 -DC30_SMARTIO_RULES=$c30_smartio_rules
-						 -DMCHP_VERSION=v${PV}-gentoo
-						 -DPIC30MAGIC
-						 -DPIC30
+		local -x CFLAGS="${CFLAGS} \
+						 -DC30_SMARTIO_RULES=$c30_smartio_rules \
+						 -DMCHP_VERSION=v${PV}-gentoo \
+						 -DPIC30MAGIC \
+						 -DPIC30 \
 						 -DPIC30PATH=\"$pic30path\" "
 		local myeconfargs=(
 			--target="pic30-${MULTIBUILD_VARIANT}"
 		)
 
-		if [[ "{MULTIBUILD_VARIANT}" == "elf" ]]
+		if [[ "${MULTIBUILD_VARIANT}" == "elf" ]]
 		then
 			CFLAGS+=" -DPIC30ELF"
 		fi
-
-		autotools-utils_src_configure
+		# cd acme
+		# S="${S}/acme" autotools-utils_src_configure
+			# --build=x86_64-pc-linux-gnu \
+			# --host=x86_64-pc-linux-gnu \
+			# --libdir=/usr/lib64 \
+		mkdir -p "${S}/build-${MULTIBUILD_VARIANT}"
+		cd "${S}/build-${MULTIBUILD_VARIANT}/acme"
+		./configure \
+			--prefix=/usr \
+			--mandir=/usr/share/man \
+			--infodir=/usr/share/info \
+			--datadir=/usr/share \
+			--sysconfdir=/etc \
+			--localstatedir=/var/lib \
+			--target="pic30-${MULTIBUILD_VARIANT}"
 	}
 
 	multibuild_foreach_variant my_configure
 }
 
 src_compile() {
-	multibuild_foreach_variant autotools-utils_src_compile
+	my_compile() {
+	#	cd acme
+	#	autotools-utils_src_compile
+		cd "${S}/build-${MULTIBUILD_VARIANT}/acme/"
+		make
+	}
+	# multibuild_foreach_variant autotools-utils_src_compile
+	multibuild_foreach_variant my_compile
 }
 
 src_install() {
+	#my_install() {
+	#	cd acme
+	#	autotools-utils_src_install
+	#}
 	multibuild_foreach_variant autotools-utils_src_install
+	# multibuild_foreach_variant my_install
+	#multibuild_foreach_variant S="${S}/acme" autotools-utils_src_install
 }
