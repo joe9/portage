@@ -2,13 +2,6 @@
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
 # $Header: $
 
-*mplabalc30-3.31 (05 Apr 2013)
-
-  05 Apr 2013; Joe M <joe9mail@gmail.com> +mplabalc30-3.31.ebuild,
-  +files/allow-empty-device-info-file.diff, +files/binutils-makefile_in.diff,
-  +files/c30_resource-paths.patch, +files/cpu-pic30.c.patch,
-  +files/default-path.patch, +files/morediffs.patch,
-  +files/relocation-fix.patch, +files/resource.patch, +files/sbrk.patch,
-  +files/search-path-fix.diff, +metadata.xml, +mplabalc30.PKGBUILD:
+  06 Apr 2013; Joe M <joe9mail@gmail.com> mplabalc30-3.31.ebuild, +README:
   Initial Import
 
