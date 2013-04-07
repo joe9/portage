@@ -8,6 +8,8 @@ inherit autotools-utils eutils multibuild toolchain-funcs
 
 # downloaded the files/*.diff files from
 #  http://david.lutolf.net/dt/pic_microchip/dist/pic30-binutils-3.11b.tar.bz2
+# interesting link at
+#	http://embeddedfreak.wordpress.com/2008/10/10/compiling-mplab-c30-v311b-under-linux/
 # synced the build with the arch pkgbuild at
 #  https://aur.archlinux.org/packages.php?ID=39084
 #  https://aur.archlinux.org/packages.php?ID=39085
