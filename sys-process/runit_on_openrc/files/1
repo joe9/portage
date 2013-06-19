@@ -6,6 +6,9 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 RUNLEVEL=S /sbin/rc sysinit
 RUNLEVEL=S /sbin/rc boot
 
+# /run is for temporary runtime data, hence, this directory
+#       would not be there on boot
+mkdir -p /run/runit/
 touch /run/runit/{stopit,reboot}
 chmod 0 /run/runit/{stopit,reboot}
 
