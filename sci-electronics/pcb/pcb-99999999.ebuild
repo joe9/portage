@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://git.geda-project.org/pcb.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ppc x86 ~x86-macos"
+KEYWORDS="~amd64 ~ppc ~x86-macos"
 IUSE="dbus debug doc gcode gif gtk jpeg m4lib-png motif nelma opengl png
 test tk toporouter xrender nls"
 # toporouter-output USE flag removed, there seems to be no result
