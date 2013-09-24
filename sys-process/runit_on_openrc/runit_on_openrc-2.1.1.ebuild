@@ -26,6 +26,9 @@ DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/admin/${MY_P}/src"
 
+# check https://wiki.archlinux.org/index.php/Runit for
+#	more details on runit usage
+
 src_prepare() {
 	# we either build everything or nothing static
 	sed -i -e 's:-static: :' Makefile
@@ -48,8 +51,8 @@ src_prepare() {
 		-e 's,/etc/runit/runsvdir/current.new,/run/runit/runsvdir/current.new,g' \
 		../man/*
 	sed -i -e 's,/etc/runit/stopit,/run/runit/stopit,g' \
-		    -e 's,/etc/runit/reboot,/run/runit/reboot,g' \
-		    -e '/chmod/a touch /run/runit/reboot; chmod 100 /run/runit/reboot;' \
+			-e 's,/etc/runit/reboot,/run/runit/reboot,g' \
+			-e '/chmod/a touch /run/runit/reboot; chmod 100 /run/runit/reboot;' \
 			"${S}/../etc/debian/ctrlaltdel"
 }
 
@@ -151,6 +154,9 @@ src_install() {
 	install_service multi atd     run.atd
 	install_service multi crond   run.crond
 	install_service multi acpid   run.acpid
+
+	insinto /etc/sv/acpid/
+	doins ${FILESDIR}/acpi_event_power
 
 	into /
 	dosbin $(<${S}/../package/commands)
