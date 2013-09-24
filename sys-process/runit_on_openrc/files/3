@@ -22,4 +22,7 @@ test -x /run/runit/reboot && LAST=6    || LAST=0
 test -x /run/runit/reboot && RC=reboot || RC=shutdown
 RUNLEVEL=$LAST /sbin/rc $RC
 
+# to check out any messages
+sleep 5
+
 # vim:filetype=sh tabstop=3 shiftwidth=3 expandtab
