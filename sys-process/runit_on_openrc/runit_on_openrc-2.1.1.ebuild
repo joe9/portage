@@ -155,8 +155,8 @@ src_install() {
 	install_service multi crond   run.crond
 	install_service multi acpid   run.acpid
 
-	insinto /etc/sv/acpid/
-	doins ${FILESDIR}/acpi_event_power
+	# insinto /etc/sv/acpid/
+	# doins ${FILESDIR}/acpi_event_power
 
 	into /
 	dosbin $(<${S}/../package/commands)
