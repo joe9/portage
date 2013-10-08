@@ -52,7 +52,6 @@ src_prepare() {
 		../man/*
 	sed -i -e 's,/etc/runit/stopit,/run/runit/stopit,g' \
 			-e 's,/etc/runit/reboot,/run/runit/reboot,g' \
-			-e '/chmod/a touch /run/runit/reboot; chmod 100 /run/runit/reboot;' \
 			"${S}/../etc/debian/ctrlaltdel"
 }
 
