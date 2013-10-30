@@ -34,12 +34,13 @@ echo 'Waiting for services to stop...'
 # 29 POLL    30 PWR     31 SYS
 
 # following the above quidelines
-# send 15 (TERM), wait a second or two
-sv -w5 term /run/runit/runsvdir/current/*
-# if that doesn't work, send 2 (INT)
-sv -w5 interrupt /run/runit/runsvdir/current/*
-# if that doesn't work, send 1 (HUP)
-sv -w5 hup /run/runit/runsvdir/current/*
+# the below does not work, sv is restarting the service when I send INT or HUP
+# # send 15 (TERM), wait a second or two
+# sv -w5 term /run/runit/runsvdir/current/*
+# # if that doesn't work, send 2 (INT)
+# sv -w5 interrupt /run/runit/runsvdir/current/*
+# # if that doesn't work, send 1 (HUP)
+# sv -w5 hup /run/runit/runsvdir/current/*
 
 # below shutdown sends TERM and CONT to running services
 sv -w30 shutdown /run/runit/runsvdir/current/*
