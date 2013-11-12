@@ -1,0 +1,138 @@
+From a098ec906c15efd3bb45fac194735407f3b85e57 Mon Sep 17 00:00:00 2001
+From: joe9 <joe9mail@gmail.com>
+Date: Mon, 11 Nov 2013 23:35:46 -0600
+Subject: [PATCH 2/2] added --startnum option to specifiy the message number to
+ start smtp downloading from
+
+This patch enables fetchmail to start downloading from the specified
+message number instead of from the first message. This helps with
+flaky SMTP connections where the connection is closed after a certain
+number of messages are downloaded.
+
+Below is further explanation of my issue.
+
+> I am using fetchmail to download from my hotmail account.
+
+> It downloads a hundred or so emails and the connection dies. It does
+> this every time. I have the "keep" option set so it keeps downloading
+> the first emails again and again.
+
+> I am trying to figure out if I can tell fetchmail to download a
+> certain message number or range of message numbers.
+---
+ driver.c      | 4 ++--
+ fetchmail.c   | 6 ++++++
+ fetchmail.h   | 1 +
+ fetchmail.man | 6 ++++++
+ options.c     | 6 ++++++
+ 5 files changed, 21 insertions(+), 2 deletions(-)
+
+diff --git a/driver.c b/driver.c
+index c291726..99e28bd 100644
+--- a/driver.c
++++ b/driver.c
+@@ -443,7 +443,7 @@ static int fetch_messages(int mailserver_socket, struct query *ctl,
+ /* fetch messages in lockstep mode */
+ {
+     flag force_retrieval;
+-    int num, firstnum = 1, lastnum = 0, err, len;
++    int num = ctl->startnum, firstnum = 1, lastnum = 0, err, len;
+     int fetchsizelimit = ctl->fetchsizelimit;
+     int msgsize;
+     int initialfetches = *fetches;
+@@ -493,7 +493,7 @@ static int fetch_messages(int mailserver_socket, struct query *ctl,
+      */
+     force_retrieval = !peek_capable && (ctl->errcount > 0);
+
+-    for (num = 1; num <= count; num++)
++    for (num = ctl->startnum; num <= count; num++)
+     {
+ 	flag suppress_delete = FALSE;
+ 	flag suppress_forward = FALSE;
+diff --git a/fetchmail.c b/fetchmail.c
+index ae30f90..cabee1c 100644
+--- a/fetchmail.c
++++ b/fetchmail.c
+@@ -1005,6 +1005,7 @@ static void optmerge(struct query *h2, struct query *h1, int force)
+     FLAG_MERGE(limit);
+     FLAG_MERGE(warnings);
+     FLAG_MERGE(fetchlimit);
++    FLAG_MERGE(startnum);
+     FLAG_MERGE(fetchsizelimit);
+     FLAG_MERGE(fastuidl);
+     FLAG_MERGE(batchlimit);
+@@ -1785,6 +1786,11 @@ static void dump_params (struct runctl *runp,
+ 		       ctl->fetchlimit, ctl->fetchlimit);
+ 	    else if (outlevel >= O_VERBOSE)
+ 		printf(GT_("  No received-message limit (--fetchlimit 0).\n"));
++	    if (NUM_NONZERO(ctl->startnum))
++		printf(GT_("  Received-first message number is %d (--fetchlimit %d).\n"),
++		       ctl->startnum, ctl->startnum);
++	    else if (outlevel >= O_VERBOSE)
++		printf(GT_("  No received-first message number (--fetchlimit 0).\n"));
+ 	    if (NUM_NONZERO(ctl->fetchsizelimit))
+ 		printf(GT_("  Fetch message size limit is %d (--fetchsizelimit %d).\n"),
+ 		       ctl->fetchsizelimit, ctl->fetchsizelimit);
+diff --git a/fetchmail.h b/fetchmail.h
+index 466ed86..9558f8d 100644
+--- a/fetchmail.h
++++ b/fetchmail.h
+@@ -363,6 +363,7 @@ struct query
+     int fastuidl;		/* do binary search for new UIDLs? */
+     int fastuidlcount;		/* internal count for frequency of binary search */
+     int	batchlimit;		/* max # msgs to pass in single SMTP session */
++    int	startnum;		/* first msg # to start from in single SMTP session */
+     int	expunge;		/* max # msgs to pass between expunges */
+     flag use_ssl;		/* use SSL encrypted session */
+     char *sslkey;		/* optional SSL private key file */
+diff --git a/fetchmail.man b/fetchmail.man
+index ad412a5..1d3fea1 100644
+--- a/fetchmail.man
++++ b/fetchmail.man
+@@ -800,6 +800,12 @@ poll.  By default there is no limit. An explicit \-\-fetchlimit of 0
+ overrides any limits set in your run control file.
+ This option does not work with ETRN or ODMR.
+ .TP
++.B \-g <number> | \-\-startnum <number>
++(Keyword: startnum)
++.br
++Start downloading from this message number. By default, downloading
++starts from the first message.
++.TP
+ .B \-\-fetchsizelimit <number>
+ (Keyword: fetchsizelimit)
+ .br
+diff --git a/options.c b/options.c
+index d53044f..a1a7a36 100644
+--- a/options.c
++++ b/options.c
+@@ -119,6 +119,7 @@ static const struct option longoptions[] = {
+
+   {"batchlimit",required_argument, (int *) 0, 'b' },
+   {"fetchlimit",required_argument, (int *) 0, 'B' },
++  {"startnum",required_argument, (int *) 0, 'g' },
+   {"fetchsizelimit",required_argument, (int *) 0, LA_FETCHSIZELIMIT },
+   {"fastuidl",	required_argument, (int *) 0, LA_FASTUIDL },
+   {"expunge",	required_argument, (int *) 0, 'e' },
+@@ -502,6 +503,10 @@ int parsecmdline (int argc /** argument count */,
+ 	    c = xatoi(optarg, &errflag);
+ 	    ctl->fetchlimit = NUM_VALUE_IN(c);
+ 	    break;
++	case 'g':
++	    c = xatoi(optarg, &errflag);
++	    ctl->startnum = NUM_VALUE_IN(c);
++	    break;
+ 	case LA_FETCHSIZELIMIT:
+ 	    c = xatoi(optarg, &errflag);
+ 	    ctl->fetchsizelimit = NUM_VALUE_IN(c);
+@@ -686,6 +691,7 @@ int parsecmdline (int argc /** argument count */,
+ 	P(GT_("  -Z, --antispam,   set antispam response values\n"));
+ 	P(GT_("  -b, --batchlimit  set batch limit for SMTP connections\n"));
+ 	P(GT_("  -B, --fetchlimit  set fetch limit for server connections\n"));
++	P(GT_("  -g, --startnum    set first message number for server connections\n"));
+ 	P(GT_("      --fetchsizelimit set fetch message size limit\n"));
+ 	P(GT_("      --fastuidl    do a binary search for UIDLs\n"));
+ 	P(GT_("  -e, --expunge     set max deletions between expunges\n"));
+--
+1.8.3.2
+
