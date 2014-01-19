@@ -76,59 +76,6 @@
 # 12:13 <@jaeger> doesn't make a lot of difference on the console
 
 
-#----------------------------------------------------------------
-# notes on process management
-
-# very interesting article
-#   http://mywiki.wooledge.org/ProcessManagement
-
-# from http://partmaps.org/era/unix/award.html#kill
-# Useless Use of Kill -9 form letter
-#    No no no.  Don't use kill -9.
-#    It doesn't give the process a chance to cleanly:
-#    1) shut down socket connections
-#    2) clean up temp files
-#    3) inform its children that it is going away
-#    4) reset its terminal characteristics
-#         and so on and so on and so on.
-#    Generally, send 15, and wait a second or two, and if that doesn't
-#    work, send 2, and if that doesn't work, send 1.  If that doesn't,
-#    REMOVE THE BINARY because the program is badly behaved!
-#    Don't use kill -9.  Don't bring out the combine harvester just to tidy
-#    up the flower pot.
-# /bin/kill --table
-#  1 HUP      2 INT      3 QUIT     4 ILL      5 TRAP     6 ABRT     7 BUS
-#  8 FPE      9 KILL    10 USR1    11 SEGV    12 USR2    13 PIPE    14 ALRM
-# 15 TERM    16 STKFLT  17 CHLD    18 CONT    19 STOP    20 TSTP    21 TTIN
-# 22 TTOU    23 URG     24 XCPU    25 XFSZ    26 VTALRM  27 PROF    28 WINCH
-# 29 POLL    30 PWR     31 SYS
-
-# #!/usr/bin/env bash
-# set -eu
-#
-# killtree() {
-#     local pid
-#     for pid; do
-#         kill -stop $pid
-#         local cpid
-#         for cpid in $(pgrep -P $pid); do
-#             killtree $cpid
-#         done
-#         kill $pid                   # NOTE. SIGTERM doesn't kill stopped process
-#         kill -cont $pid             # So I added sending SIGCONT
-#     done
-# }
-#
-# (trap exit TERM; sleep 100) 2>/dev/null &
-#     # handling SIGTERM, so that bash wouldn't complain about child being killed
-#     # redirecting stderr to prevent seeing child's complains about sleep being killed
-# self=$$
-# children=$(pgrep -P $self)
-# children=$(echo $children $(pgrep -P $children))
-# killtree $(pgrep -P $self)
-# pgrep -P $$ || true
-# ps -p ${children/ /,} -o pid= || true
-
 # exec /sbin/agetty --autologin joe --8bits --keep-baud 38400 tty6 startx
 # the above line is causing these errors in /var/log/auth
 # Jan 21 19:11:08 master agetty[269]: /dev/tty6: cannot get controlling tty:
@@ -151,4 +98,6 @@
 
 # the above line is not working in gentoo as there is no command called
 #  pause
-exec /usr/bin/setsid /bin/sh -c 'exec /sbin/agetty --autologin joe 38400 tty6 startx'
+set -o verbose
+set -o xtrace
+exec /usr/bin/setsid /bin/sh -c 'exec /sbin/agetty --noclear --autologin joe tty6 38400 startx'
