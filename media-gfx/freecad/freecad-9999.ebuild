@@ -10,7 +10,9 @@ inherit eutils multilib fortran-2 python cmake-utils git-2
 
 DESCRIPTION="QT based Computer Aided Design application"
 HOMEPAGE="http://www.freecadweb.org/"
-EGIT_REPO_URI="git://git.code.sf.net/p/free-cad/code"
+# EGIT_REPO_URI="git://git.code.sf.net/p/free-cad/code"
+EGIT_REPO_URI="git://github.com/FreeCAD/FreeCAD_sf_master"
+#git@github.com:FreeCAD/FreeCAD_sf_master.git
 EGIT_PROJECT="${PN}"
 
 LICENSE="GPL-2"
