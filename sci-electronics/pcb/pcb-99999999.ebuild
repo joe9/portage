@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-electronics/pcb/pcb-20110918.ebuild,v 1.8 2013/01/04 12:58:37 ago Exp $
+# $Header: $
 
 EAPI="5"
 
@@ -12,11 +12,12 @@ EGIT_REPO_URI="git://git.geda-project.org/pcb.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86-macos"
-IUSE="dbus debug doc gcode gif gtk jpeg m4lib-png motif nelma opengl png
+KEYWORDS=""
+IUSE="dbus debug doc gcode gif +gtk jpeg m4lib-png motif nelma opengl png
 test tk toporouter xrender nls"
-# toporouter-output USE flag removed, there seems to be no result
+DOCS="AUTHORS README NEWS ChangeLog"
 
+# toporouter-output USE flag removed, there seems to be no result
 CDEPEND="gif? ( >=media-libs/gd-2.0.23 )
 	gtk? ( x11-libs/gtk+:2 x11-libs/pango
 		x11-libs/gtkglext
@@ -44,24 +45,18 @@ DEPEND="${CDEPEND}
 	virtual/pkgconfig
 	sys-devel/gettext"
 
-RDEPEND="${CDEPEND}"
-	#sci-electronics/electronics-menu"
+RDEPEND="${CDEPEND}
+	sci-electronics/electronics-menu"
 
-pkg_setup() {
-	if use gtk && use motif; then
-		elog "Can only build for GTK+ or Motif/Lesstif GUI. GTK+ has priority."
-	fi
+REQUIRED_USE=" ?? ( gtk motif )
+	 dbus? ( || ( gtk motif ) )
+	 opengl? ( gtk )
+	 xrender? ( motif )
+"
+
+pkg_pretend() {
 	if !(use gtk || use motif); then
-		elog "Building without GUI, make sure you know what you are doing."
-	fi
-	if use dbus && !(use gtk || use motif); then
-		elog "dbus needs GTK or Motif/Lesstif GUI. Try USE=-dbus or USE=gtk or USE=motif."
-	fi
-	if use opengl && !(use gtk); then
-		elog "GL drawing needs GTK"
-	fi
-	if (use gtk || (! use gtk && ! use motif)) &&  (use xrender); then
-		elog "The XRender extension is only usable with the Motif/Lesstif GUI."
+		ewarn "${P} is being built without a GUI, make sure you know what you're doing!  Otherwise please enable GTK or MOTIF use flags"
 	fi
 }
 
@@ -75,14 +70,14 @@ src_prepare() {
 			sed -i '/^hid_gcode/d' tests/tests.list || die
 		fi
 	fi
-	# Backport from upstream
-	# http://git.geda-project.org/pcb/commit/?id=a34b40add60310a51780f359cc90d9c5ee75752c
-	# (do not install static GTS library)
-	sed -i -e 's/lib_LIBRARIES/noinst_LIBRARIES/' -e 's/include_HEADERS/noinst_HEADERS/' gts/Makefile.am || die
 
+	# eautoreconf is running without errors without the below sed
+	# replacement. Leave this line commented if the need arises later.
 	# fix bad syntax in Makefile.am and configure.ac before running eautoreconf
-	sed -i -e 's/:=/=/' Makefile.am || die
+	# sed -i -e 's/:=/=/' Makefile.am || die
+
 	#epatch "${FILESDIR}"/${P}-fix-config.diff
+
 	eautoreconf
 }
 
@@ -91,9 +86,9 @@ src_configure() {
 	if use gtk ; then
 		myconf="--with-gui=gtk $(use_enable dbus) $(use_enable opengl gl) --disable-xrender"
 	elif use motif ; then
-		myconf="--with-gui=lesstif $(use_enable dbus) $(use_enable xrender)"
+		myconf="--with-gui=lesstif $(use_enable dbus) $(use_enable xrender) --disable-gl"
 	else
-		myconf="--with-gui=batch --disable-xrender --disable-dbus"
+		myconf="--with-gui=batch --disable-xrender --disable-dbus --disable-gl"
 	fi
 
 	local exporters="bom gerber ps"
@@ -116,7 +111,6 @@ src_configure() {
 		$(use_enable nls) \
 		--disable-toporouter-output \
 		--with-exporters="${exporters}" \
-		--disable-dependency-tracking \
 		--disable-rpath \
 		--disable-update-mime-database \
 		--disable-update-desktop-database \
@@ -127,11 +121,6 @@ src_configure() {
 
 src_compile() {
 	emake AR="$(tc-getAR)"
-}
-
-src_install() {
-	emake DESTDIR="${D}" install || die "install failed"
-	dodoc AUTHORS README NEWS ChangeLog
 }
 
 pkg_preinst() {
