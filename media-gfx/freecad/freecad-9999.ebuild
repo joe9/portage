@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-gfx/freecad/freecad-0.13.1830.ebuild,v 1.2 2013/05/09 08:36:38 xmw Exp $
 
-EAPI=5
+EAPI="5"
 
 PYTHON_DEPEND=2
 
@@ -41,6 +41,7 @@ RDEPEND="dev-cpp/eigen:3
 	sys-libs/zlib
 	virtual/glu"
 DEPEND="${RDEPEND}
+	dev-python/pyside
 	>=dev-lang/swig-2.0.4-r1:0"
 
 # http://bugs.gentoo.org/show_bug.cgi?id=352435
