@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -13,11 +13,10 @@ EGIT_REPO_URI="git://git.geda-project.org/pcb.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="dbus debug doc gcode gif +gtk jpeg m4lib-png motif nelma opengl png
-test tk toporouter xrender nls"
+IUSE="dbus debug doc gcode gif +gtk jpeg m4lib-png motif nelma nls opengl
+png test tk toporouter xrender"
 DOCS="AUTHORS README NEWS ChangeLog"
 
-# toporouter-output USE flag removed, there seems to be no result
 CDEPEND="gif? ( >=media-libs/gd-2.0.23 )
 	gtk? ( x11-libs/gtk+:2 x11-libs/pango
 		x11-libs/gtkglext
@@ -34,7 +33,6 @@ CDEPEND="gif? ( >=media-libs/gd-2.0.23 )
 	png? ( >=media-libs/gd-2.0.23[png] )
 	m4lib-png? ( >=media-libs/gd-2.0.23[png] )
 	tk? ( >=dev-lang/tk-8 )"
-#toporouter-output? ( x11-libs/cairo )
 
 DEPEND="${CDEPEND}
 	test? (
@@ -51,11 +49,10 @@ RDEPEND="${CDEPEND}
 REQUIRED_USE=" ?? ( gtk motif )
 	 dbus? ( || ( gtk motif ) )
 	 opengl? ( gtk )
-	 xrender? ( motif )
-"
+	 xrender? ( motif ) "
 
 pkg_pretend() {
-	if !(use gtk || use motif); then
+	if ! use gtk  && ! use motif; then
 		ewarn "${P} is being built without a GUI, make sure you know what you're doing!  Otherwise please enable GTK or MOTIF use flags"
 	fi
 }
@@ -63,20 +60,14 @@ pkg_pretend() {
 src_prepare() {
 	if use test; then
 		# adapt the list of tests to run according to USE flag settings
-		if ! use png; then
-			sed -i '/^hid_png/d' tests/tests.list || die
-		fi
-		if ! use gcode; then
-			sed -i '/^hid_gcode/d' tests/tests.list || die
-		fi
+		use png || sed -i '/^hid_png/d' tests/tests.list || die
+		use gcode || sed -i '/^hid_gcode/d' tests/tests.list || die
 	fi
 
 	# eautoreconf is running without errors without the below sed
 	# replacement. Leave this line commented if the need arises later.
 	# fix bad syntax in Makefile.am and configure.ac before running eautoreconf
 	# sed -i -e 's/:=/=/' Makefile.am || die
-
-	#epatch "${FILESDIR}"/${P}-fix-config.diff
 
 	eautoreconf
 }
@@ -92,7 +83,7 @@ src_configure() {
 	fi
 
 	local exporters="bom gerber ps"
-	if (use png || use jpeg || use gif) ; then
+	if use png || use jpeg || use gif; then
 		exporters="${exporters} png"
 	fi
 	use nelma && exporters="${exporters} nelma"
@@ -116,8 +107,6 @@ src_configure() {
 		--disable-update-desktop-database \
 		--docdir="${EPREFIX}/usr/share/doc/${PF}"
 }
-# toporouter-output USE flag removed, there seems to be no result
-#		$(use_enable toporouter-output) \
 
 src_compile() {
 	emake AR="$(tc-getAR)"
