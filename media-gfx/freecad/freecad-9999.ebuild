@@ -1,12 +1,12 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-gfx/freecad/freecad-0.13.1830.ebuild,v 1.2 2013/05/09 08:36:38 xmw Exp $
+# $Header: $
 
 EAPI="5"
 
-PYTHON_DEPEND=2
+PYTHON_COMPAT=( python{2_6,2_7} )
 
-inherit eutils multilib fortran-2 python cmake-utils git-2
+inherit multilib fortran-2 python-single-r1 cmake-utils git-2
 
 DESCRIPTION="QT based Computer Aided Design application"
 HOMEPAGE="http://www.freecadweb.org/"
@@ -16,8 +16,7 @@ EGIT_PROJECT="${PN}"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
-IUSE=""
+KEYWORDS=""
 
 # https://bugs.gentoo.org/show_bug.cgi?id=474794
 #	<=sci-libs/opencascade-6.5.5
@@ -50,16 +49,12 @@ RESTRICT="bindist mirror"
 
 pkg_setup() {
 	fortran-2_pkg_setup
-	python_set_active_version 2
-}
-
-src_prepare() {
-	epatch "${FILESDIR}"/${P}-remove-qt3-support.patch
+	python-single-r1_pkg_setup
 }
 
 src_configure() {
 	local my_occ_env=${EROOT}etc/env.d/50opencascade
-	if [ -e "${EROOT}etc//env.d/51opencascade" ] ; then
+	if [ -e "${EROOT}etc/env.d/51opencascade" ] ; then
 		my_occ_env=${EROOT}etc/env.d/51opencascade
 	fi
 	export CASROOT=$(sed -ne '/^CASROOT=/{s:.*=:: ; p}' $my_occ_env)
@@ -75,7 +70,7 @@ src_configure() {
 		-DSOQT_LIBRARY="${EROOT}"usr/$(get_libdir)/libSoQt.so
 		-DSOQT_INCLUDE_PATH="${EROOT}"usr/include/coin
 		-DCMAKE_BINARY_DIR="${EROOT}"usr/bin
-		-DCMAKE_INSTALL_PREFIX="${EROOT}"usr/$(get_libdir)/${P}
+		-DCMAKE_INSTALL_PREFIX="${EROOT}"usr/$(get_libdir)/${PN}
 	)
 	cmake-utils_src_configure
 	ewarn "${P} will be built against opencascade version ${CASROOT}"
@@ -85,6 +80,11 @@ src_install() {
 	cmake-utils_src_install
 
 	prune_libtool_files
+
+	dosym /usr/$(get_libdir)/${PN}/bin/FreeCAD /usr/bin/FreeCAD
+	dosym /usr/$(get_libdir)/${PN}/bin/FreeCADCmd /usr/bin/FreeCADCmd
+	# dosym "/usr/$(get_libdir)/${PN}/bin/FreeCAD" "/usr/bin/freecad"
+	dosym "/usr/$(get_libdir)/${PN}/bin/FreeCAD" "/usr/bin/${PN}"
 
 	dodoc README.Linux ChangeLog.txt
 }
