@@ -77,8 +77,10 @@ src_configure() {
 	if use gtk ; then
 		myconf="--with-gui=gtk $(use_enable dbus) $(use_enable opengl gl) --disable-xrender"
 	elif use motif ; then
+		use opengl && einfo "Ignoring opengl use flag, requires gtk"
 		myconf="--with-gui=lesstif $(use_enable dbus) $(use_enable xrender) --disable-gl"
 	else
+		use opengl && einfo "Ignoring opengl use flag, requires gtk"
 		myconf="--with-gui=batch --disable-xrender --disable-dbus --disable-gl"
 	fi
 
