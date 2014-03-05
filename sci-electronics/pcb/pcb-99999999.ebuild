@@ -13,8 +13,7 @@ EGIT_REPO_URI="git://git.geda-project.org/pcb.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="dbus debug doc gcode gif +gtk jpeg m4lib-png motif nelma nls opengl
-png test tk toporouter xrender"
+IUSE="dbus debug doc gcode gif +gtk jpeg m4lib-png motif nelma nls opengl png test tk toporouter xrender"
 DOCS="AUTHORS README NEWS ChangeLog"
 
 CDEPEND="gif? ( >=media-libs/gd-2.0.23 )
