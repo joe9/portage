@@ -17,6 +17,7 @@ EGIT_PROJECT="${PN}"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # https://bugs.gentoo.org/show_bug.cgi?id=474794
 #	<=sci-libs/opencascade-6.5.5
@@ -26,8 +27,8 @@ RDEPEND="dev-cpp/eigen:3
 	dev-libs/libf2c
 	dev-libs/libspnav[X]
 	dev-libs/xerces-c[icu]
-	dev-python/PyQt4[svg]
-	dev-python/pivy
+	dev-python/PyQt4[svg,${PYTHON_USEDEP}]
+	dev-python/pivy[${PYTHON_USEDEP}]
 	dev-qt/qtgui:4
 	dev-qt/qtopengl:4
 	dev-qt/qtsvg:4
@@ -40,7 +41,8 @@ RDEPEND="dev-cpp/eigen:3
 	sys-libs/zlib
 	virtual/glu"
 DEPEND="${RDEPEND}
-	dev-python/pyside
+	dev-python/pyside[${PYTHON_USEDEP}]
+        ${PYTHON_DEPS}
 	>=dev-lang/swig-2.0.4-r1:0"
 
 # http://bugs.gentoo.org/show_bug.cgi?id=352435
