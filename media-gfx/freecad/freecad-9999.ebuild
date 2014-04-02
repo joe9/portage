@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python{2_6,2_7} )
 
 inherit multilib fortran-2 python-single-r1 cmake-utils git-2
 
-DESCRIPTION="QT based Computer Aided Design application"
+DESCRIPTION="Qt based Computer Aided Design application"
 HOMEPAGE="http://www.freecadweb.org/"
 EGIT_REPO_URI="git://git.code.sf.net/p/free-cad/code"
 # EGIT_REPO_URI="git://github.com/FreeCAD/FreeCAD_sf_master"
