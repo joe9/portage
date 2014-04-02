@@ -34,6 +34,7 @@ RDEPEND="dev-cpp/eigen:3
 	dev-qt/qtsvg:4
 	dev-qt/qtwebkit:4
 	dev-qt/qtxmlpatterns:4
+	dev-qt/designer
 	media-libs/SoQt
 	media-libs/coin[doc]
 	sci-libs/gts
@@ -42,7 +43,7 @@ RDEPEND="dev-cpp/eigen:3
 	virtual/glu"
 DEPEND="${RDEPEND}
 	dev-python/pyside[${PYTHON_USEDEP}]
-        ${PYTHON_DEPS}
+		${PYTHON_DEPS}
 	>=dev-lang/swig-2.0.4-r1:0"
 
 # http://bugs.gentoo.org/show_bug.cgi?id=352435
