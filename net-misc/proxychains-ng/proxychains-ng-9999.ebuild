@@ -18,11 +18,11 @@ IUSE=""
 src_prepare() {
 	epatch "${FILESDIR}"/${P}-configure.patch
 	epatch "${FILESDIR}"/${P}-makefile.patch
-	sed -i "s/^\(LDSO_SUFFIX\).*/\1 = so.${PV}/" Makefile || die
+	sed -i -e "s/^\(LDSO_SUFFIX\).*/\1 = so.${PV}/" Makefile || die
 	tc-export CC
 	mv src/proxychains.conf src/proxychains-ng.conf
 	mv src/libproxychains.c src/libproxychains-ng.c
-	sed -i "s/proxychains\.conf/proxychains-ng.conf/" src/common.h || die
+	sed -i -e "s/proxychains\.conf/proxychains-ng.conf/" src/common.h || die
 }
 
 src_install() {
