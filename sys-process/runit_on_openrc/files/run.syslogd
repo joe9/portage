@@ -6,5 +6,5 @@
 if [ -x /usr/sbin/syslogd ]; then
    mkdir -p /var/log/news
    # -n to avoid auto-backgrounding
-   exec /usr/sbin/syslogd -n -r
+   exec /usr/sbin/syslogd -n
 fi
