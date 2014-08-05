@@ -9,6 +9,6 @@ then
         chmod 750 /var/log/$SVNAME
 fi
 
-exec /sbin/svlogd -tt /var/log/$SVNAME
+exec /sbin/svlogd -t /var/log/$SVNAME
 
 # got the above from http://lateral.netmanagers.com.ar/stories/36.html
