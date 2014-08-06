@@ -21,8 +21,9 @@ RDEPEND="
 	dietlibc? ( dev-libs/dietlibc )
 	app-shells/dash
 	sys-apps/openrc
-	virtual/daemontools
 "
+#	virtual/daemontools
+
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/admin/${MY_P}/src"
