@@ -21,6 +21,7 @@ RDEPEND="
 	dietlibc? ( dev-libs/dietlibc )
 	app-shells/dash
 	sys-apps/openrc
+	virtual/daemontools
 "
 DEPEND="${RDEPEND}"
 
