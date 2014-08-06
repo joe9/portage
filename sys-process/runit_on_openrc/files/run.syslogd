@@ -3,6 +3,7 @@
 # syslogd:  Syslog daemon.
 #
 
+exec 2>&1
 if [ -x /usr/sbin/syslogd ]; then
    mkdir -p /var/log/news
    # -n to avoid auto-backgrounding

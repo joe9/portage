@@ -98,6 +98,7 @@
 
 # the above line is not working in gentoo as there is no command called
 #  pause
+exec 2>&1
 set -o verbose
 set -o xtrace
 exec /usr/bin/setsid /bin/sh -c 'exec /sbin/agetty --noclear --autologin joe tty6 38400 startx'
