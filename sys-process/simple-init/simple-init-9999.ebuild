@@ -23,5 +23,5 @@ src_install() {
 	# default services
 	emake DESTDIR="${D}" install
 	mv "${D}/sbin/init" "${D}/sbin/simple-init"
-	mv "${D}/share/man/man8/init.8" "${D}/share/man/man8/simple-init.8"
+	mv "${D}/usr/share/man/man8/init.8" "${D}/usr/share/man/man8/simple-init.8"
 }
