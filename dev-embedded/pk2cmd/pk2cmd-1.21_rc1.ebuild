@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-embedded/pk2cmd/pk2cmd-1.20.ebuild,v 1.4 2012/05/25 08:01:20 ssuominen Exp $
 
@@ -17,7 +17,8 @@ SLOT="0"
 KEYWORDS="~ppc ~ppc64 ~amd64 ~x86"
 
 DEPEND="virtual/libusb:0
-		dev-embedded/pk2df"
+		dev-embedded/pk2df
+		app-arch/unzip"
 RDEPEND="${DEPEND}"
 
 # S="${WORKDIR}/${PN}/${PN}"
@@ -38,12 +39,12 @@ src_prepare() {
 	# patch --merge -p0 -i $SRC/usb_debug.patch
 
 	# Fix up the Makefile
-	sed -i 's:#TARGET=linux:TARGET=linux:' Makefile
-	sed -i 's:DBG=-O2:DBG=:' Makefile
-	sed -i 's:^CFLAGS=:CFLAGS+=:' Makefile
-	sed -i 's:^LDFLAGS=:LDFLAGS+=:' Makefile
-	sed -i 's:^LIBUSB=/usr/local:LIBUSB=/usr:' Makefile
-	sed -i "s:^CC=g++::" Makefile
+	sed -i 's:#TARGET=linux:TARGET=linux:' Makefile || die "sed failed: target"
+	sed -i 's:DBG=-O2:DBG=:' Makefile || die "sed failed: dbg"
+	sed -i 's:^CFLAGS=:CFLAGS+=:' Makefile || die "sed failed: cflags"
+	sed -i 's:^LDFLAGS=:LDFLAGS+=:' Makefile || die "sed failed: ldflags"
+	sed -i 's:^LIBUSB=/usr/local:LIBUSB=/usr:' Makefile || die "sed failed: libusb"
+	sed -i "s:^CC=g++::" Makefile || die "sed failed:g++"
 }
 
 src_compile() {
