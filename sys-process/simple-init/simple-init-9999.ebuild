@@ -13,15 +13,20 @@ EGIT_REPO_URI="https://github.com/joe9/init.git"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS=""
+IUSE="-X"
 
 RDEPEND="
 	sys-apps/openrc
 "
 DEPEND="${RDEPEND}"
 
+src_compile() {
+	use X && emake DESTDIR="${D}" allx || emake DESTDIR="${D}" all
+}
+
 src_install() {
 	# default services
-	emake DESTDIR="${D}" install
+	use X && emake DESTDIR="${D}" installx || emake DESTDIR="${D}" install
 	mv "${D}/sbin/init" "${D}/sbin/simple-init"
 	mv "${D}/usr/share/man/man8/init.8" "${D}/usr/share/man/man8/simple-init.8"
 }
