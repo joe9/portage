@@ -15,7 +15,7 @@ HOMEPAGE="https://github.com/mooz/percol"
 EGIT_REPO_URI=$HOMEPAGE
 EGIT_BRANCH="master"
 
-LICENSE=""
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 
