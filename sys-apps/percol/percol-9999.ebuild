@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI="5"
 inherit distutils git-2
 PYTHON_DEPEND="2"
 
@@ -13,9 +13,8 @@ EGIT_BRANCH="master"
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="~x64-macos"
+KEYWORDS=""
 IUSE=""
 
 DEPEND="dev-lang/python"
 RDEPEND="${DEPEND}"
-
