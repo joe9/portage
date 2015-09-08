@@ -26,6 +26,8 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	epatch "${FILESDIR}/ignore_1005_mode_error.patch"
+	# can use epatch_user functionality instead of polluting
+	#   this ebuild with the below patches
 	epatch "${FILESDIR}/0001-changed-font-to-dejavu-sans-mono.patch"
 	epatch "${FILESDIR}/0002-changed-word-delimiters.patch"
 	epatch "${FILESDIR}/0003-changed-bell-volume.patch"
