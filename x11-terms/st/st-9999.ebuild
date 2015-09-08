@@ -3,7 +3,7 @@
 # $Header: /var/cvsroot/gentoo-x86/x11-terms/st/st-9999.ebuild,v 1.12 2014/01/06 21:17:53 jer Exp $
 
 EAPI=5
-inherit eutils git-r3 multilib savedconfig toolchain-funcs
+inherit eutils git-r3 multilib toolchain-funcs
 
 DESCRIPTION="simple terminal implementation for X"
 HOMEPAGE="http://st.suckless.org/"
@@ -26,6 +26,13 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	epatch "${FILESDIR}/ignore_1005_mode_error.patch"
+	epatch "${FILESDIR}/0001-changed-font-to-dejavu-sans-mono.patch"
+	epatch "${FILESDIR}/0002-changed-word-delimiters.patch"
+	epatch "${FILESDIR}/0003-changed-bell-volume.patch"
+	epatch "${FILESDIR}/0004-changed-tabspaces.patch"
+	epatch "${FILESDIR}/0005-changed-colors.patch"
+	epatch "${FILESDIR}/0006-changed-default-colors.patch"
+	epatch "${FILESDIR}/0007-changed-italic-and-underline-colours.patch"
 
 	sed -e '/^CFLAGS/s:[[:space:]]-Wall[[:space:]]: :' \
 		-e '/^CFLAGS/s:[[:space:]]-O[^[:space:]]*[[:space:]]: :' \
@@ -36,8 +43,6 @@ src_prepare() {
 	sed -e '/@echo/!s:@::' \
 		-i Makefile || die
 	tc-export CC
-
-	restore_config config.h
 }
 
 src_install() {
@@ -46,8 +51,6 @@ src_install() {
 	dodoc TODO
 
 	make_desktop_entry ${PN} simpleterm utilities-terminal 'System;TerminalEmulator;' ''
-
-	save_config config.h
 }
 
 pkg_postinst() {

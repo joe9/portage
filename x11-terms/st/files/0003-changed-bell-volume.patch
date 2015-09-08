@@ -1,0 +1,26 @@
+From feb4f5cbb57fac1751428d7b052630e8758f0239 Mon Sep 17 00:00:00 2001
+From: joe9 <joe9mail@gmail.com>
+Date: Tue, 8 Sep 2015 17:05:21 -0400
+Subject: [PATCH 3/7] changed bell volume
+
+---
+ config.def.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/config.def.h b/config.def.h
+index 82acab9..03152fb 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -95,7 +95,8 @@ static unsigned int cursorthickness = 2;
+  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
+  * it
+  */
+-static int bellvolume = 0;
++/* static int bellvolume = 0; */
++static int bellvolume = -98;
+ 
+ /* TERM value */
+ static char termname[] = "st-256color";
+-- 
+2.4.6
+

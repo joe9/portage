@@ -1,0 +1,26 @@
+From 3c6903bf2b172da6cbf6ab28c4d14a146990e8ae Mon Sep 17 00:00:00 2001
+From: joe9 <joe9mail@gmail.com>
+Date: Tue, 8 Sep 2015 17:05:58 -0400
+Subject: [PATCH 4/7] changed tabspaces
+
+---
+ config.def.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/config.def.h b/config.def.h
+index 03152fb..648092c 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -101,7 +101,8 @@ static int bellvolume = -98;
+ /* TERM value */
+ static char termname[] = "st-256color";
+ 
+-static unsigned int tabspaces = 8;
++/* static unsigned int tabspaces = 8; */
++static unsigned int tabspaces = 3;
+ 
+ 
+ /* Terminal colors (16 first used in escape sequence) */
+-- 
+2.4.6
+

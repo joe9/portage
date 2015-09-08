@@ -1,0 +1,32 @@
+From bed6aefb01058954d0632ab67dd5e4853969de74 Mon Sep 17 00:00:00 2001
+From: joe9 <joe9mail@gmail.com>
+Date: Tue, 8 Sep 2015 17:08:14 -0400
+Subject: [PATCH 6/7] changed default colors
+
+---
+ config.def.h | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index 70f7f9c..bcaeb87 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -171,9 +171,12 @@ static const char *colorname[] = {
+  * Default colors (colorname index)
+  * foreground, background, cursor
+  */
+-static unsigned int defaultfg = 7;
+-static unsigned int defaultbg = 0;
+-static unsigned int defaultcs = 256;
++/* static unsigned int defaultfg = 7; */
++/* static unsigned int defaultbg = 0; */
++/* static unsigned int defaultcs = 256; */
++static unsigned int defaultfg = 258;
++static unsigned int defaultbg = 259;
++static unsigned int defaultcs = 260;
+ 
+ /*
+  * Default shape of cursor
+-- 
+2.4.6
+

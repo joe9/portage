@@ -1,0 +1,29 @@
+From 9b55ab87c369c5851321c9368d35c0a2ebb4f838 Mon Sep 17 00:00:00 2001
+From: joe9 <joe9mail@gmail.com>
+Date: Tue, 8 Sep 2015 17:12:14 -0400
+Subject: [PATCH 7/7] changed italic and underline colours
+
+---
+ config.def.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index bcaeb87..c606fa0 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -200,8 +200,10 @@ static unsigned int mousebg = 0;
+  * will reverse too. Another logic would only make the simple feature too
+  * complex.
+  */
+-static unsigned int defaultitalic = 11;
+-static unsigned int defaultunderline = 7;
++/* static unsigned int defaultitalic = 11; */
++/* static unsigned int defaultunderline = 7; */
++static unsigned int defaultitalic = 258;
++static unsigned int defaultunderline = 258;
+ 
+ /* Internal mouse shortcuts. */
+ /* Beware that overloading Button1 will disable the selection. */
+-- 
+2.4.6
+
