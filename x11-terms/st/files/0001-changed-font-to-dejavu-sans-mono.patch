@@ -11,11 +11,11 @@ diff --git a/config.def.h b/config.def.h
 index 52bf3a4..699869e 100644
 --- a/config.def.h
 +++ b/config.def.h
-@@ -5,7 +5,41 @@
+@@ -5,8 +5,41 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
   */
--static char font[] = "Liberation Mono:pixelsize=12:antialias=false:autohint=false";
+-static char font[] = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 +/*
 +  use the below utility from ft2demos to figure out what makes
 +  the font look better
@@ -54,6 +54,6 @@ index 52bf3a4..699869e 100644
  static int borderpx = 2;
  
  /*
--- 
+--
 2.4.6
 
