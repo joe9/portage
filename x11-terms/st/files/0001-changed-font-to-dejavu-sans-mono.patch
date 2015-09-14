@@ -1,6 +1,6 @@
-From ca7df000f5ff8e017ffb8990c79d4ee62b6fab02 Mon Sep 17 00:00:00 2001
+From f8ed77fae1db287d5b8ed3a499079b9df659b09b Mon Sep 17 00:00:00 2001
 From: joe9 <joe9mail@gmail.com>
-Date: Tue, 8 Sep 2015 17:43:17 -0400
+Date: Sun, 13 Sep 2015 20:01:11 -0400
 Subject: [PATCH] changed font to dejavu sans mono
 
 ---
@@ -8,10 +8,10 @@ Subject: [PATCH] changed font to dejavu sans mono
  1 file changed, 35 insertions(+), 1 deletion(-)
 
 diff --git a/config.def.h b/config.def.h
-index 52bf3a4..699869e 100644
+index b6adc5e..f63e5d9 100644
 --- a/config.def.h
 +++ b/config.def.h
-@@ -5,8 +5,41 @@
+@@ -5,7 +5,41 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
   */
@@ -48,12 +48,12 @@ index 52bf3a4..699869e 100644
 +/* pixelsize=14 works fine too, but 15 is easier on the eye */
 +/* static char font[] = "Inconsolata:pixelsize=15:hinting=true:antialias=true:hintstyle=hintfull:lcdfilter=lcddefault"; */
 +/* static char font[] = "Terminus"; */
-+/* static char font[] = "Liberation Mono:pixelsize=12:antialias=false:autohint=false"; */
++/* static char font[] = "Liberation Mono:pixelsize=12:antialias=true:autohint=true"; */
 +/* static char font[] = "DejaVu Sans Mono:pixelsize=12:antialias=false:autohint=false"; */
 +static char font[] = "DejaVu Sans Mono:pixelsize=12:";
  static int borderpx = 2;
  
  /*
---
+-- 
 2.4.6
 
