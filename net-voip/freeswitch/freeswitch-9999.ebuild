@@ -245,12 +245,12 @@ fs_set_module() {
 	local mod="$2"
 
 	case ${mod} in
-	mod_freetdm)
-		category="../../libs/freetdm"
-		;;
-	*)
-		category="$(ls -d src/mod/*/${mod} | cut -d'/' -f3)"
-		;;
+		mod_freetdm)
+			category="../../libs/freetdm"
+			;;
+		*)
+			category="$(ls -d src/mod/*/${mod} | cut -d'/' -f3)"
+			;;
 	esac
 
 	[ -z "${category}" ] && {
@@ -258,19 +258,19 @@ fs_set_module() {
 	}
 
 	case $1 in
-	enable)
-		einfo "  ++ Enabling ${mod}"
-		echo "${category}/${mod}" >> "${config}"
-		;;
+		enable)
+			einfo "  ++ Enabling ${mod}"
+			echo "${category}/${mod}" >> "${config}"
+			;;
 
-	disable)
-		einfo "  -- Disabling ${mod}"
-		echo "#${category}/${mod}" >> "${config}"
-		;;
-	*)
-		eerror "fs_set_module <enable|disable> <module_path>"
-		return 1
-		;;
+		disable)
+			einfo "  -- Disabling ${mod}"
+			echo "#${category}/${mod}" >> "${config}"
+			;;
+		*)
+			eerror "fs_set_module <enable|disable> <module_path>"
+			return 1
+			;;
 	esac
 
 	return 0
@@ -308,12 +308,12 @@ setup_modules() {
 esl_modname() {
 	[ -z "$1" ] && return 1
 	case "$1" in
-	"python")
-		echo "pymod"
-		;;
-	*)
-		echo "${1#*-}mod"
-		;;
+		"python")
+			echo "pymod"
+			;;
+		*)
+			echo "${1#*-}mod"
+			;;
 	esac
 	return 0
 }
@@ -351,23 +351,23 @@ esl_doperlmod() {
 			[ "${x}" != "${x%.so}" ] && target="arch"
 
 			case "${target}" in
-			"lib")
-				insinto "${installvendorlib}"
-				insopts -m644
-				doins -r "${x}" || die "failed to install ${x}"
-				;;
-			"arch")
-				insinto "${installvendorarch}"
-				insopts -m755
-				doins "${x}" || die "failed to install ${x}"
-				;;
+				"lib")
+					insinto "${installvendorlib}"
+					insopts -m644
+					doins -r "${x}" || die "failed to install ${x}"
+					;;
+				"arch")
+					insinto "${installvendorarch}"
+					insopts -m755
+					doins "${x}" || die "failed to install ${x}"
+					;;
 			esac
 		done
 	) || die "failed to install $@"
 }
 
 src_prepare() {
-	# disable -Werror
+	# disable -Werror, without this ./configure --disable-debug fails compilation
 	epatch "${FILESDIR}/freeswitch-no-werror.patch"
 
 	# enable / disable optional modules
@@ -379,9 +379,8 @@ src_prepare() {
 		einfo "Using parallel bootstrap..."
 		BOOTSTRAP_OPTS="-j"
 	}
+	# multi-threaded bootstrap
 	if [ "${PV}" = "9999" ]; then
-		git_src_prepare
-		# multi-threaded bootstrap
 		./bootstrap.sh ${BOOTSTRAP_OPTS}
 	else
 		./rebootstrap.sh ${BOOTSTRAP_OPTS}
