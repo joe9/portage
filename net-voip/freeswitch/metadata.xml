@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer>
+  <email>mva@mva.name</email>
+</maintainer>
+<upstream>
+  <doc lang="en">http://wiki.freeswitch.org/</doc>
+  <bugs-to>http://jira.freeswitch.org/</bugs-to>
+</upstream>
+<use>
+  <flag name="samples">Install sample configuration files</flag>
+  <flag name="resampler">Enable support for up-/downsampling of audio (e.g. 48KHz -> 8KHz)</flag>
+  <flag name="sctp">Enable SCTP (Stream-Control-Transport-Protocol) support (mod_sofia, ...)</flag>
+  <flag name="libpri">Build OpenZAP/FreeTDM with libpri module</flag>
+
+  <!-- ESL -->
+  <flag name="esl">Event-Socket Library</flag>
+  <flag name="esl-lua">LUA bindings for ESL</flag>
+  <flag name="esl-perl">Perl bindings for ESL</flag>
+  <flag name="esl-python">Python bindings for ESL</flag>
+
+  <!-- FREESWITCH_MODULES -->
+  <flag name="fax">Fax receive/transmit application module inclusion (mod_spandsp)</flag>
+</use>
+</pkgmetadata>
