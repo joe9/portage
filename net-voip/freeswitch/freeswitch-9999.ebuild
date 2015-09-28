@@ -419,7 +419,7 @@ src_configure() {
 		--localstatedir="/var" \
 		--sysconfdir="/etc/${PN}" \
 		--with-modinstdir="/usr/$(get_libdir)/${PN}/mod" \
-		--with-rundir="/var/run/${PN}" \
+		--with-rundir="/var/run/" \
 		--with-logfiledir="/var/log/${PN}" \
 		--with-dbdir="/var/lib/${PN}/db" \
 		--with-htdocsdir="/usr/share/${PN}/htdocs" \
@@ -534,10 +534,11 @@ src_install() {
 
 	fowners -Rf ${FREESWITCH_USER}:${FREESWITCH_GROUP} "/etc/${PN}"
 	fowners -Rf ${FREESWITCH_USER}:${FREESWITCH_GROUP} "/usr/$(get_libdir)/${PN}"
-	fowners -Rf ${FREESWITCH_USER}:${FREESWITCH_GROUP} "/var/run/${PN}"
 	fowners -Rf ${FREESWITCH_USER}:${FREESWITCH_GROUP} "/var/log/${PN}"
 	fowners -Rf ${FREESWITCH_USER}:${FREESWITCH_GROUP} "/usr/share/${PN}"
 	fowners -Rf ${FREESWITCH_USER}:${FREESWITCH_GROUP} "/var/lib/${PN}"
+	# move this to /etc/init.d/freeswitch
+	#	fowners -Rf ${FREESWITCH_USER}:${FREESWITCH_GROUP} "/var/run/${PN}"
 }
 
 pkg_postinst() {
