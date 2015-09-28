@@ -1,0 +1,3 @@
+[submodule "net-voip/freeswitch/FreeSwitch-Gentoo"]
+	path = net-voip/freeswitch/FreeSwitch-Gentoo
+	url = git@github.com:konradwyr/FreeSwitch-Gentoo.git
