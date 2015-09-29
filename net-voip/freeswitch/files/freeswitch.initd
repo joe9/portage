@@ -17,12 +17,22 @@ start() {
     test -d /var/run/freeswitch &&
         chown --recursive --silent freeswitch:freeswitch /var/run/freeswitch
 
-    start-stop-daemon --background --make-pidfile --user ${FREESWITCH_USER:-freeswitch} --group ${FREESWITCH_GROUP:-freeswitch} --pidfile "${FREESWITCH_PIDFILE:-/var/run/freeswitch.pid}" --start /usr/bin/freeswitch ${FREESWITCH_OPTS:--nc}
+    test -d /var/run && mkdir --parents /var/run/freeswitch
+    test -d /var/run/freeswitch &&
+        chown --recursive --silent freeswitch:freeswitch /var/run/freeswitch &&
+        touch /var/run/freeswitch/freeswitch.pid &&
+        chown freeswitch:freeswitch /var/run/freeswitch/freeswitch.pid
+
+    test -d /var/lib && mkdir --parents /var/lib/freeswitch
+    test -d /var/lib/freeswitch &&
+        chown --recursive --silent freeswitch:freeswitch /var/lib/freeswitch
+
+    start-stop-daemon --background --user ${FREESWITCH_USER:-freeswitch} --group ${FREESWITCH_GROUP:-freeswitch} --pidfile "${FREESWITCH_PIDFILE:-/var/run/freeswitch/freeswitch.pid}" --start /usr/bin/freeswitch ${FREESWITCH_OPTS:--nc}
     eend $?
 }
 
 stop() {
         ebegin "Stopping FreeSWITCH"
-        start-stop-daemon --pidfile "${FREESWITCH_PIDFILE:-/var/run/freeswitch.pid}" --stop "/usr/bin/freeswitch"
+        start-stop-daemon --pidfile "${FREESWITCH_PIDFILE:-/var/run/freeswitch/freeswitch.pid}" --stop "/usr/bin/freeswitch"
         eend $?
 }
