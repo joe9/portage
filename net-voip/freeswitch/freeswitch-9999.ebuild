@@ -368,7 +368,9 @@ esl_doperlmod() {
 
 src_prepare() {
 	# disable -Werror, without this ./configure --disable-debug fails compilation
-	epatch "${FILESDIR}/freeswitch-no-werror.patch"
+	epatch "${FILESDIR}/no-werror.patch"
+	# freetdm configure script is ignoring the --sysconfdir argument
+	epatch "${FILESDIR}/freetdm-use-configure-argument-sysconfdir.patch"
 
 	# enable / disable optional modules
 	setup_modules

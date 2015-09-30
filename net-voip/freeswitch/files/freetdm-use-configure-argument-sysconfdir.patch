@@ -1,0 +1,11 @@
+--- libs/freetdm/configure.ac	2015-09-30 12:38:45.512297573 -0400
++++ libs/freetdm/configure.ac	2015-09-30 12:38:54.808515491 -0400
+@@ -49,7 +49,7 @@
+ if test "$sysconfdir" = "\${prefix}/etc" ; then
+ 	confdir="$prefix/conf"
+ else
+-	confdir="$sysconfdir"
++	eval confdir="$sysconfdir"
+ fi
+
+ AC_SUBST([confdir])
