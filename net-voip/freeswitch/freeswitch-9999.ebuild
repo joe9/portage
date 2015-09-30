@@ -176,7 +176,9 @@ DEPEND="${RDEPEND}
 	esl_python? ( >=dev-lang/swig-1.1:1 )
 	freeswitch_modules_java? ( >=virtual/jdk-1.5:* )
 	freeswitch_modules_portaudio? ( media-libs/portaudio )
+	freeswitch_modules_sndfile? ( media-libs/libsndfile )
 	libedit? ( dev-libs/libedit )
+	freeswitch_modules_opus? ( media-libs/opus )
 "
 
 PDEPEND="media-sound/freeswitch-sounds
