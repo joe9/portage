@@ -421,7 +421,6 @@ src_configure() {
 		--disable-option-checking \
 		${CTARGET:+--target=${CTARGET}} \
 		--localstatedir="/var" \
-		--sysconfdir="/etc/${PN}" \
 		--with-modinstdir="/usr/$(get_libdir)/${PN}/mod" \
 		--with-rundir="/var/run/" \
 		--with-logfiledir="/var/log/${PN}" \
