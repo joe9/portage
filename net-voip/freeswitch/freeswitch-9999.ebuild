@@ -390,11 +390,6 @@ src_prepare() {
 		./rebootstrap.sh ${BOOTSTRAP_OPTS}
 	fi
 
-	if use freeswitch_modules_freetdm
-	then
-		( cd "${S}/libs/freetdm" ; ./bootstrap ; ) || die "Failed to bootstrap FreeTDM"
-	fi
-
 	if use esl_python; then
 		python_get_version &>/dev/null && PYVER=$(python_get_version) || die "Failed to determine current python version"
 		sed -i -e "/^LOCAL_/{ s:python-2\.[0-9]:python-${PYVER}:g; s:python2\.[0-9]:python${PYVER}:g }" \
@@ -435,7 +430,6 @@ src_configure() {
 		$(use_enable sctp) \
 		$(use_enable zrtp) \
 		$(use_with freeswitch_modules_python python "$(PYTHON -a)") \
-		$(use_enable resampler resample) \
 		$(use_enable odbc core-odbc-support) \
 		${java_opts} ${config_opts} || die "failed to configure FreeSWITCH"
 
@@ -453,12 +447,12 @@ src_configure() {
 src_compile() {
 	local esl_lang
 
-	if use freeswitch_modules_freetdm; then
-#	# breaks freetdm:
-#	filter-flags -fvisibility-inlines-hidden
-		einfo "Building FreeTDM..."
-		emake -C libs/freetdm || die "failed to build FreeTDM"
-	fi
+	#	if use freeswitch_modules_freetdm; then
+	# #	# breaks freetdm:
+	# #	filter-flags -fvisibility-inlines-hidden
+	#		einfo "Building FreeTDM..."
+	#		emake -C libs/freetdm || die "failed to build FreeTDM"
+	#	fi
 	einfo "Building FreeSWITCH... (this can take a long time)"
 	emake MONO_SHARED_DIR="${T}" || die "failed to build FreeSWITCH"
 	for esl_lang in ${ESL}; do
