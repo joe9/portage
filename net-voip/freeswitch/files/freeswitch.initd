@@ -27,7 +27,7 @@ start() {
     test -d /var/lib/freeswitch &&
         chown --recursive --silent freeswitch:freeswitch /var/lib/freeswitch
 
-    start-stop-daemon --background --user ${FREESWITCH_USER:-freeswitch} --group ${FREESWITCH_GROUP:-freeswitch} --pidfile "${FREESWITCH_PIDFILE:-/var/run/freeswitch/freeswitch.pid}" --start /usr/bin/freeswitch ${FREESWITCH_OPTS:--nc}
+    start-stop-daemon --background --user ${FREESWITCH_USER:-freeswitch} --group ${FREESWITCH_GROUP:-freeswitch} --pidfile "${FREESWITCH_PIDFILE:-/var/run/freeswitch/freeswitch.pid}" --start /usr/bin/freeswitch -- ${FREESWITCH_OPTS:--nc}
     eend $?
 }
 

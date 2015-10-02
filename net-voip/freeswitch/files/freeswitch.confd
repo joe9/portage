@@ -1,4 +1,5 @@
-#FREESWITCH_OPTS="-nc"
-#FREESWITCH_USER=freeswitch
-#FREESWITCH_GROUP=freeswitch
-#FREESWITCH_PIDFILE="/var/run/freeswitch.pid"
+
+FREESWITCH_OPTS="-nc -nonat -conf /etc/freeswitch.minimal -u freeswitch -g freeswitch -log /var/log/freeswitch -db /var/lib/freeswitch/db -run /var/run/freeswitch "
+FREESWITCH_USER=freeswitch
+FREESWITCH_GROUP=freeswitch
+FREESWITCH_PIDFILE="/var/run/freeswitch/freeswitch.pid"
