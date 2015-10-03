@@ -416,6 +416,16 @@ src_configure() {
 		--disable-option-checking \
 		${CTARGET:+--target=${CTARGET}} \
 		--localstatedir="/var" \
+		--with-modinstdir="/usr/$(get_libdir)/${PN}/mod" \
+		--with-rundir="/var/run/" \
+		--with-logfiledir="/var/log/${PN}" \
+		--with-dbdir="/var/lib/${PN}/db" \
+		--with-htdocsdir="/usr/share/${PN}/htdocs" \
+		--with-soundsdir="/usr/share/${PN}/sounds" \
+		--with-grammardir="/usr/share/${PN}/grammar" \
+		--with-scriptdir="/usr/share/${PN}/scripts" \
+		--with-recordingsdir="/var/lib/${PN}/recordings" \
+		--with-pkgconfigdir="/usr/$(get_libdir)/pkgconfig" \
 		$(use_enable libedit core-libedit-support) \
 		$(use_enable sctp) \
 		$(use_enable zrtp) \
@@ -423,14 +433,15 @@ src_configure() {
 		$(use_enable odbc core-odbc-support) \
 		${java_opts} ${config_opts} || die "failed to configure FreeSWITCH"
 
-	if use freeswitch_modules_freetdm; then
-		pushd "${S}/libs/freetdm"
-		einfo "Configuring FreeTDM..."
-		econf \
-			--with-pkgconfigdir=/usr/$(get_libdir)/pkgconfig \
-			${config_opts} || die "failed to configure FreeTDM"
-		popd
-	fi
+		if use freeswitch_modules_freetdm; then
+			pushd "${S}/libs/freetdm"
+			einfo "Configuring FreeTDM..."
+			econf \
+				--with-modinstdir="/usr/$(get_libdir)/${PN}/mod" \
+				--with-pkgconfigdir=/usr/$(get_libdir)/pkgconfig \
+				${config_opts} || die "failed to configure FreeTDM"
+			popd
+		fi
 }
 
 src_compile() {
