@@ -32,9 +32,7 @@ src_prepare() {
 	epatch "${FILESDIR}/0002-changed-word-delimiters.patch"
 	epatch "${FILESDIR}/0003-changed-bell-volume.patch"
 	epatch "${FILESDIR}/0004-changed-tabspaces.patch"
-	epatch "${FILESDIR}/0005-changed-colors.patch"
-	epatch "${FILESDIR}/0006-changed-default-colors.patch"
-	epatch "${FILESDIR}/0007-changed-italic-and-underline-colours.patch"
+	epatch "${FILESDIR}/0005-changed-default-colors.patch"
 
 	sed -e '/^CFLAGS/s:[[:space:]]-Wall[[:space:]]: :' \
 		-e '/^CFLAGS/s:[[:space:]]-O[^[:space:]]*[[:space:]]: :' \

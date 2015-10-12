@@ -1,18 +1,18 @@
-From 0a1c38b90dc30bcb34aef590ea7e6490b6d9ce42 Mon Sep 17 00:00:00 2001
+From e1704a22b5d3238bfe8ecfe95a6113a5e511090b Mon Sep 17 00:00:00 2001
 From: joe9 <joe9mail@gmail.com>
-Date: Tue, 8 Sep 2015 17:06:58 -0400
-Subject: [PATCH 5/7] changed colors
+Date: Sun, 11 Oct 2015 22:20:10 -0400
+Subject: [PATCH] changed default colors
 
 ---
- config.def.h | 81 ++++++++++++++++++++++++++++++++++++++++++------------------
- 1 file changed, 57 insertions(+), 24 deletions(-)
+ config.def.h | 99 ++++++++++++++++++++++++++++++++++++++++++------------------
+ 1 file changed, 69 insertions(+), 30 deletions(-)
 
 diff --git a/config.def.h b/config.def.h
-index 648092c..70f7f9c 100644
+index 860ce3d..a0840e7 100644
 --- a/config.def.h
 +++ b/config.def.h
-@@ -106,31 +106,64 @@ static unsigned int tabspaces = 3;
- 
+@@ -68,32 +68,66 @@ static char termname[] = "st-256color";
+ static unsigned int tabspaces = 8;
  
  /* Terminal colors (16 first used in escape sequence) */
 +/* static const char *colorname[] = { */
@@ -40,6 +40,7 @@ index 648092c..70f7f9c 100644
 +
 +/*	/\* more colors can be added after 255 to use with DefaultXX *\/ */
 +/*	"#cccccc", */
++/*	"#555555", */
 +/* }; */
  static const char *colorname[] = {
 -	/* 8 normal colors */
@@ -66,6 +67,7 @@ index 648092c..70f7f9c 100644
 -
 -	/* more colors can be added after 255 to use with DefaultXX */
 -	"#cccccc",
+-	"#555555",
 +   /* 8 normal colors */
 +   "#2e3436",
 +   "#cc0000",
@@ -90,6 +92,7 @@ index 648092c..70f7f9c 100644
 +
 +   /* more colors can be added after 255 to use with DefaultXX */
 +   "#cccccc",
++   "#555555",
 +   "#333333",
 +   /* URxvt*foreground : DarkGrey*/
 +   "#cacaca",
@@ -100,6 +103,35 @@ index 648092c..70f7f9c 100644
  };
  
  
+@@ -101,9 +135,12 @@ static const char *colorname[] = {
+  * Default colors (colorname index)
+  * foreground, background, cursor, reverse cursor
+  */
+-static unsigned int defaultfg = 7;
+-static unsigned int defaultbg = 0;
+-static unsigned int defaultcs = 256;
++/* static unsigned int defaultfg = 7; */
++/* static unsigned int defaultbg = 0; */
++/* static unsigned int defaultcs = 256; */
++static unsigned int defaultfg = 259;
++static unsigned int defaultbg = 260;
++static unsigned int defaultcs = 261;
+ static unsigned int defaultrcs = 257;
+ 
+ /*
+@@ -127,8 +164,10 @@ static unsigned int mousebg = 0;
+  * will reverse too. Another logic would only make the simple feature too
+  * complex.
+  */
+-static unsigned int defaultitalic = 11;
+-static unsigned int defaultunderline = 7;
++/* static unsigned int defaultitalic = 11; */
++/* static unsigned int defaultunderline = 7; */
++static unsigned int defaultitalic = 259;
++static unsigned int defaultunderline = 259;
+ 
+ /*
+  * Internal mouse shortcuts.
 -- 
-2.4.6
+2.4.9
 
