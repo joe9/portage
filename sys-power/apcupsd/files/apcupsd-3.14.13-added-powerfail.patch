@@ -1,0 +1,57 @@
+From d21efe0d269483c08fe30994720b64981394fcc1 Mon Sep 17 00:00:00 2001
+From: joe9 <joe9mail@gmail.com>
+Date: Fri, 13 Nov 2015 20:53:55 -0500
+Subject: [PATCH 2/2] added apcupsd-powerfail
+
+---
+ autoconf/configure.in     | 2 +-
+ configure                 | 2 +-
+ platforms/gentoo/Makefile | 4 +++-
+ 3 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/autoconf/configure.in b/autoconf/configure.in
+index b69e649..2b33aa2 100644
+--- a/autoconf/configure.in
++++ b/autoconf/configure.in
+@@ -1181,7 +1181,7 @@ gentoo)
+    DISTVER=`awk '/version / {print $5}' < /etc/gentoo-release`
+    DFILES="\
+       platforms/gentoo/apcupsd \
+-      platforms/gentoo/halt"
++      platforms/gentoo/apcupsd-powerfail"
+    ;;
+ hpux)
+    DISTVER=`uname -r`
+diff --git a/configure b/configure
+index 76017d5..d54088b 100755
+--- a/configure
++++ b/configure
+@@ -13260,7 +13260,7 @@ gentoo)
+    DISTVER=`awk '/version / {print $5}' < /etc/gentoo-release`
+    DFILES="\
+       platforms/gentoo/apcupsd \
+-      platforms/gentoo/halt"
++      platforms/gentoo/apcupsd-powerfail"
+    ;;
+ hpux)
+    DISTVER=`uname -r`
+diff --git a/platforms/gentoo/Makefile b/platforms/gentoo/Makefile
+index 879ccda..0b2421e 100644
+--- a/platforms/gentoo/Makefile
++++ b/platforms/gentoo/Makefile
+@@ -10,9 +10,11 @@ install-gentoo:
+ 	$(call DISTINST,gentoo)
+ 	$(call MKDIR,/etc/init.d)
+ 	$(call INSTPROG,744,apcupsd,/etc/init.d/apcupsd)
+-	$(call INSTPROG,744,halt,/etc/init.d/halt)
++	$(call INSTPROG,744,apcupsd-powerfail,/etc/init.d/apcupsd-powerfail)
++#	$(call INSTPROG,744,halt,/etc/init.d/halt)
+ 
+ uninstall-gentoo:
+ 	$(call DISTUNINST,gentoo)
+ 	-$(call UNINST,/etc/init.d/apcupsd)
++	-$(call UNINST,/etc/init.d/apcupsd-powerfail)
+ #	$(call UNINST,/etc/init.d/halt)
+-- 
+2.4.10
+
