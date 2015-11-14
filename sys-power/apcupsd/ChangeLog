@@ -2,6 +2,17 @@
 # Copyright 1999-2015 Gentoo Foundation; Distributed under the GPL v2
 # $Header: /var/cvsroot/gentoo-x86/sys-power/apcupsd/ChangeLog,v 1.103 2015/04/29 19:37:47 mrueg Exp $
 
+  13 Nov 2015; Joe M <joe9mail@gmail.com> -apcupsd-3.14.13.ebuild:
+  Bump to new version with the below changes:
+    1. changed apcupsd.powerfail to apcupsd-powerfail, to avoid confusing this script with the script names of multiple apcupsd instances.
+    2. changed EAPI to 5
+    3. removed || die commands after eutils
+    4. used upstream mechanism to generate /etc/init.d/{apcupsd,apcupsd-powerfail} to avoid having to hardcode piddir, powerfaildir, sysconfdir, etc.
+    5. use the apcupsd.conf of the upstream package. That appears saner than the one packaged in the files/.
+    6. nisip defaulted to 127.0.0.1 instead of leaving it at 0.0.0.0
+    7. removed the configure argument for nis-port, as it defaults to 3551 anyway.
+    8. changed default --with-pwrfail-dir to /run/apcupsd from /etc/apcupsd, to help in situations where /etc is read-only.
+
   29 Apr 2015; Manuel Rüger <mrueg@gentoo.org> -apcupsd-3.14.8-r1.ebuild:
   Remove old.
 
