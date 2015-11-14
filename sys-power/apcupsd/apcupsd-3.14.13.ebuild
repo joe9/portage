@@ -61,7 +61,7 @@ src_configure() {
 	econf \
 		--sbindir=/sbin \
 		--sysconfdir=/etc/apcupsd \
-		--with-pwrfail-dir=/etc/apcupsd \
+		--with-pwrfail-dir=/run/apcupsd \
 		--with-lock-dir=/run/apcupsd \
 		--with-pid-dir=/run/apcupsd \
 		--with-log-dir=/var/log \
@@ -78,17 +78,14 @@ src_compile() {
 	# Workaround for bug #280674; upstream should really just provide
 	# the text files in the distribution, but I wouldn't count on them
 	# doing that anytime soon.
-	MANPAGER=$(type -p cat) \
-			emake || die "emake failed"
+	MANPAGER=$(type -p cat) emake
 }
 
 src_install() {
-	emake DESTDIR="${D}" install || die "installed failed"
-	rm -f "${D}"/etc/init.d/halt
+	emake DESTDIR="${D}" install
 
 	insinto /etc/apcupsd
 	newins examples/safe.apccontrol safe.apccontrol
-	#	doins "${FILESDIR}"/apcupsd.conf
 
 	dodoc ChangeLog* ReleaseNotes
 	doman doc/*.8 doc/*.5
