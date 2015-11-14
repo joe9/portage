@@ -11,7 +11,7 @@ depend() {
 
 start() {
     if  ! yesno ${RC_REBOOT} && \
-            [ "${RC_RUNLEVEL}" = "shutdown" -a -f "@PWRFAILDIR/powerfail" ] ; then
+            [ "${RC_RUNLEVEL}" = "shutdown" -a -f "@PWRFAILDIR@/powerfail" ] ; then
         ebegin 'Signaling UPS to kill power'
         /sbin/apcupsd --killpower
         eend $?
