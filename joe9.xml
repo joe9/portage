@@ -2,7 +2,7 @@
 
 <repositories version="1.0">
         <repo priority="50" quality="experimental" status="unofficial">
-                <name>joe9-github</name>
+                <name>joe9</name>
                 <description>joe9 overlay hosted on github.</description>
                 <homepage>https://github.com/joe9/portage</homepage>
                 <owner>
