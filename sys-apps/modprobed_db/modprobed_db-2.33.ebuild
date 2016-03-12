@@ -26,5 +26,5 @@ src_install() {
 	doman doc/${MY_PN}.8
 
 	insinto /usr/share/${MY_PN}
-	doins common/${MY_PN} || die
+	doins common/${MY_PN}.skel || die
 }
