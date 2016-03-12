@@ -23,5 +23,5 @@ S="${WORKDIR}/${MY_P}"
 
 src_install() {
 	dobin common/${MY_PN}
-	newman doc/${MY_PN}.8 ${MY_PN}.8
+	doman doc/${MY_PN}.8
 }
