@@ -24,4 +24,7 @@ S="${WORKDIR}/${MY_P}"
 src_install() {
 	dobin common/${MY_PN}
 	doman doc/${MY_PN}.8
+
+	insinto /usr/share/${MY_PN}
+	doins common/${MY_PN} || die
 }
