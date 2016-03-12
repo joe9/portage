@@ -1,0 +1,29 @@
+# ChangeLog for sys-apps/modprobed_db
+# Copyright 1999-2016 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  12 Mar 2016; Joe M <joe9mail@gmail.com> +modprobed_db-2.33.ebuild,
+  +metadata.xml:
+  Bug #398273: Upgraded package version to 2.33
+
+*modprobed_db-2.33 (12 Mar 2016)
+
+  12 Mar 2016; Joe M <joe9mail@gmail.com> +modprobed_db-2.33.ebuild,
+  +metadata.xml:
+  Bug #398273: Upgraded package version to 2.33
+
+  19 Mar 2012; Justin Lecher <jlec@gentoo.org> modprobed_db-2.0-r1.ebuild:
+  Correct dep from sys-apps/module-init-tools to virtual/modutils
+
+*modprobed_db-2.0-r1 (10 Jan 2012)
+
+  10 Jan 2012; hasufell <julian.ospald@googlemail.com>
+  -modprobed_db-2.0.ebuild, +modprobed_db-2.0-r1.ebuild:
+  new src_uri
+
+*modprobed_db-2.0 (09 Jan 2012)
+
+  09 Jan 2012; hasufell <julian.ospald@googlemail.com>
+  +modprobed_db-2.0.ebuild, +metadata.xml:
+  New ebuild for bug 398273
+
