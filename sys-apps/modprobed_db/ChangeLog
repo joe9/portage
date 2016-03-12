@@ -5,6 +5,9 @@
   12 Mar 2016; Joe M <joe9mail@gmail.com> modprobed_db-2.33.ebuild:
   Bug #398273: Upgraded package version to 2.33
 
+  12 Mar 2016; Joe M <joe9mail@gmail.com> modprobed_db-2.33.ebuild:
+  Bug #398273: Upgraded package version to 2.33
+
   12 Mar 2016; Joe M <joe9mail@gmail.com> +modprobed_db-2.33.ebuild,
   +metadata.xml:
   Bug #398273: Upgraded package version to 2.33
