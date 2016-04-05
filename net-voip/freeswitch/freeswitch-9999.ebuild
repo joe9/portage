@@ -369,8 +369,12 @@ esl_doperlmod() {
 }
 
 src_prepare() {
-	# disable -Werror, without this ./configure --disable-debug fails compilation
-	epatch "${FILESDIR}/no-werror.patch"
+
+	if [ "${PV}" = "1.6.0" ]; then
+		# disable -Werror, without this ./configure --disable-debug fails compilation
+		# this is not required in the current master
+		epatch "${FILESDIR}/no-werror.patch"
+	fi
 	# freetdm configure script is ignoring the --sysconfdir argument
 	epatch "${FILESDIR}/freetdm-use-configure-argument-sysconfdir.patch"
 
