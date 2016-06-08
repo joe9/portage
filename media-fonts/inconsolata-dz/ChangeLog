@@ -1,0 +1,16 @@
+# ChangeLog for media-fonts/inconsolata-dz
+# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*inconsolata-dz-20091202 (10 Feb 2014)
+
+  10 Feb 2014; Joe M <joe9mail@gmail.com> +inconsolata-dz-20091202.ebuild,
+  +metadata.xml:
+  Bug #500892: After review on #gentoo-sunrise
+
+*inconsolata_dz-20091202 (10 Feb 2014)
+
+  10 Feb 2014; Joe M <joe9mail@gmail.com> +inconsolata_dz-20091202.ebuild,
+  +metadata.xml:
+  Bug #500892: New ebuild for media-fonts/inconsolata_dz
+
