@@ -31,7 +31,6 @@ src_prepare() {
 	epatch "${FILESDIR}/0001-changed-font-to-dejavu-sans-mono.patch"
 	epatch "${FILESDIR}/0002-changed-word-delimiters.patch"
 	epatch "${FILESDIR}/0003-changed-bell-volume.patch"
-	epatch "${FILESDIR}/0004-changed-tabspaces.patch"
 	epatch "${FILESDIR}/0005-changed-default-colors.patch"
 
 	sed -e '/^CFLAGS/s:[[:space:]]-Wall[[:space:]]: :' \
