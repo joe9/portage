@@ -1,7 +1,0 @@
-# ChangeLog for app-editors/nano
-# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
-# $Header: $
-
-  06 Feb 2013; XXXXXX xxxxxx <xxxx@gentoo.org> nano-2.3.1-r2.ebuild:
-  Initial nano.static build, based on the nano ebuild,
-  submitted by Joe M <joe9mail@gmail.com>
