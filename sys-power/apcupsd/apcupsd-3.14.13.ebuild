@@ -71,7 +71,7 @@ src_configure() {
 		$(use_enable snmp net-snmp) \
 		$(use_enable gnome gapcmon) \
 		${myconf} \
-		APCUPSD_MAIL=/bin/mail
+		APCUPSD_MAIL=/usr/bin/mail
 }
 
 src_compile() {
