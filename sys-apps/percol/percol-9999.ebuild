@@ -6,7 +6,7 @@ EAPI="5"
 # PYTHON_COMPAT=( python2_7 )
 # https://wiki.gentoo.org/wiki/Project:Python/Implementations
 # pytho3.4 is the current stable
-PYTHON_COMPAT=( python3_{4,5} )
+PYTHON_COMPAT=( python3_5 )
 # PYTHON_COMPAT=( python2_7 python3_4 )
 
 inherit git-r3 distutils-r1
