@@ -1,12 +1,13 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI="5"
 
 # PYTHON_COMPAT=( python2_7 )
-# PYTHON_COMPAT=( python3_3 )
-PYTHON_COMPAT=( python2_7 python3_3 )
+# https://wiki.gentoo.org/wiki/Project:Python/Implementations
+# pytho3.4 is the current stable
+PYTHON_COMPAT=( python3_4 )
+# PYTHON_COMPAT=( python2_7 python3_4 )
 
 inherit git-r3 distutils-r1
 
