@@ -6,6 +6,7 @@ EAPI="5"
 # PYTHON_COMPAT=( python2_7 )
 # https://wiki.gentoo.org/wiki/Project:Python/Implementations
 # pytho3.4 is the current stable
+# but python 3.5 is the default on my machine
 PYTHON_COMPAT=( python3_5 )
 # PYTHON_COMPAT=( python2_7 python3_4 )
 
