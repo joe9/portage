@@ -1,14 +1,12 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+# check https://gpo.zugaina.org/dev-python/percol for ideas
+EAPI="6"
 
-# PYTHON_COMPAT=( python2_7 )
-# https://wiki.gentoo.org/wiki/Project:Python/Implementations
-# pytho3.4 is the current stable
-# but python 3.5 is the default on my machine
-PYTHON_COMPAT=( python3_5 )
-# PYTHON_COMPAT=( python2_7 python3_4 )
+# percol currently supports only Python 2.x
+# https://github.com/mooz/percol#installation
+PYTHON_COMPAT=( python2_7 )
 
 inherit git-r3 distutils-r1
 
